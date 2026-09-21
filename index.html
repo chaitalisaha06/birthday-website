@@ -45,7 +45,8 @@
     body {
       font-family: var(--font-body);
       color: var(--text-dark);
-      background-color: var(--bg-cream);
+      background: #ffe4ec url("assets/website-bg.jpg") no-repeat center center fixed;
+      background-size: cover;
       min-height: 100vh;
       min-height: 100dvh;
       overflow-x: hidden;
@@ -65,10 +66,7 @@
     .ambient-glow {
       position: fixed;
       inset: 0;
-      background:
-        radial-gradient(circle at 20% 15%, rgba(253, 226, 236, 0.6) 0%, transparent 45%),
-        radial-gradient(circle at 80% 85%, rgba(254, 215, 226, 0.5) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(255, 245, 240, 0.9) 0%, #fff7f9 100%);
+      background: radial-gradient(circle at 50% 45%, rgba(255, 245, 248, 0.05) 0%, rgba(244, 114, 182, 0.12) 100%);
       pointer-events: none;
       z-index: 0;
     }
@@ -294,14 +292,14 @@
     .balloon-stage {
       position: relative;
       width: min(92vw, 440px);
-      height: 420px;
+      height: 440px;
       margin: 10px auto;
     }
 
     .balloon-slot {
       position: absolute;
-      width: 120px;
-      height: 180px;
+      width: 130px;
+      height: 200px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -309,64 +307,77 @@
     }
 
     .b-slot-1 {
-      top: 15px;
-      left: 15px;
+      top: 10px;
+      left: 18px;
       animation: balloonSway1 4.2s ease-in-out infinite;
     }
 
     .b-slot-2 {
-      top: 10px;
-      right: 15px;
+      top: 6px;
+      right: 18px;
       animation: balloonSway2 3.8s ease-in-out infinite;
     }
 
     .b-slot-3 {
-      bottom: 25px;
-      left: 35px;
+      bottom: 18px;
+      left: 28px;
       animation: balloonSway2 4.5s ease-in-out infinite;
     }
 
     .b-slot-4 {
-      bottom: 20px;
-      right: 35px;
+      bottom: 14px;
+      right: 28px;
       animation: balloonSway1 4s ease-in-out infinite;
     }
 
     @keyframes balloonSway1 {
-
       0%,
       100% {
         transform: translateY(0) rotate(-2deg);
       }
-
       50% {
         transform: translateY(-14px) rotate(3deg);
       }
     }
 
     @keyframes balloonSway2 {
-
       0%,
       100% {
         transform: translateY(0) rotate(3deg);
       }
-
       50% {
         transform: translateY(-16px) rotate(-2deg);
       }
     }
 
     .balloon-item {
-      width: 82px;
-      height: 104px;
+      width: 96px;
+      height: 185px;
       cursor: pointer;
       position: relative;
-      transition: transform 0.15s ease;
-      filter: drop-shadow(0 10px 14px rgba(120, 40, 70, 0.14));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      filter: drop-shadow(0 12px 18px rgba(175, 40, 80, 0.18));
+      touch-action: manipulation;
     }
 
     .balloon-item:hover {
-      transform: scale(1.08);
+      transform: scale(1.1) translateY(-4px);
+    }
+
+    .balloon-item:active {
+      transform: scale(0.95);
+    }
+
+    .balloon-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
     }
 
     .balloon-item.popping {
@@ -379,12 +390,10 @@
         transform: scale(1);
         opacity: 1;
       }
-
       40% {
         transform: scale(1.35);
         opacity: 0.9;
       }
-
       100% {
         transform: scale(0.1);
         opacity: 0;
@@ -394,20 +403,23 @@
     .revealed-word {
       font-family: var(--font-display);
       font-style: italic;
-      font-size: 34px;
+      font-size: 38px;
       font-weight: 700;
       color: var(--deep-wine);
       opacity: 0;
-      transform: scale(0.6);
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       position: absolute;
-      text-shadow: 0 2px 8px rgba(160, 30, 70, 0.12);
+      top: 36%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      text-shadow: 0 2px 10px rgba(160, 30, 70, 0.18);
       pointer-events: none;
+      z-index: 2;
     }
 
     .revealed-word.show {
       opacity: 1;
-      transform: scale(1);
+      transform: translate(-50%, -50%) scale(1);
     }
 
     .balloon-counter {
@@ -422,109 +434,235 @@
     }
 
     /* ========================================================
-       SCREEN 3: BLOW THE CANDLE
+       SCREEN 3: BLOW THE CANDLE (SCREENSHOT REPLICA)
        ======================================================== */
+    .s3-flourish {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+
+    .s3-title {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 6vw, 44px);
+      font-weight: 700;
+      color: #6a152e;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+      text-shadow: 0 2px 10px rgba(106, 21, 46, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .s3-subtitle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: clamp(14px, 3.5vw, 17px);
+      color: #5c2b3c;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .sub-heart {
+      color: #e11d48;
+      font-size: 14px;
+      display: inline-block;
+      filter: drop-shadow(0 0 4px rgba(225, 29, 72, 0.3));
+    }
+
     .cake-scene {
       position: relative;
-      width: min(88vw, 380px);
+      width: min(92vw, 420px);
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 10px auto;
+      margin: 4px auto 14px;
     }
 
-    .cake-graphic {
-      width: 250px;
-      height: 230px;
+    .cake-stage {
+      width: min(84vw, 320px);
+      aspect-ratio: 274 / 268;
       position: relative;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
-    /* Flickering Candle Flame */
-    .candle-flame {
-      position: absolute;
-      top: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 20px;
-      height: 32px;
-      background: radial-gradient(circle at 50% 80%, #fff7b0 0%, #ff8a00 65%, rgba(255, 60, 0, 0.8) 100%);
-      border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
-      filter: drop-shadow(0 0 16px rgba(255, 170, 0, 0.85));
-      animation: flameWobble 1s ease-in-out infinite alternate;
-      transform-origin: 50% 90%;
-      transition: opacity 0.35s ease, transform 0.35s ease;
+    .cake-stage:hover {
+      transform: scale(1.03);
     }
 
-    @keyframes flameWobble {
-      0% {
-        transform: translateX(-50%) rotate(-3deg) scaleY(1);
-      }
-
-      50% {
-        transform: translateX(-50%) rotate(2deg) scaleX(0.95);
-      }
-
-      100% {
-        transform: translateX(-50%) rotate(4deg) scaleY(1.08);
-      }
-    }
-
-    .candle-smoke {
-      position: absolute;
-      top: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 14px;
-      height: 48px;
-      opacity: 0;
+    .cake-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+      filter: drop-shadow(0 14px 28px rgba(180, 50, 90, 0.16));
       pointer-events: none;
     }
 
-    .candle-smoke.drift {
-      animation: smokeRise 2.2s ease-out forwards;
+    .cake-img-unlit {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.45s ease;
+    }
+
+    .cake-stage.blown .cake-img-lit {
+      opacity: 0;
+      transition: opacity 0.45s ease;
+    }
+
+    .cake-stage.blown .cake-img-unlit {
+      opacity: 1;
+    }
+
+    /* Twinkling Star Sparkles */
+    .cake-star {
+      position: absolute;
+      color: #ffffff;
+      font-size: 22px;
+      text-shadow: 0 0 10px #ffffff, 0 0 18px #ffdfba;
+      pointer-events: none;
+      animation: starTwinkle 2.2s ease-in-out infinite alternate;
+      line-height: 1;
+    }
+
+    .star-1 { top: 22%; left: 6%; animation-delay: 0.1s; font-size: 24px; }
+    .star-2 { top: 12%; right: 15%; animation-delay: 0.7s; font-size: 22px; }
+    .star-3 { top: 50%; right: 0%; animation-delay: 1.2s; font-size: 26px; }
+    .star-4 { top: 46%; left: 0%; animation-delay: 0.4s; font-size: 20px; }
+
+    @keyframes starTwinkle {
+      0% {
+        transform: scale(0.7) rotate(0deg);
+        opacity: 0.5;
+      }
+      100% {
+        transform: scale(1.15) rotate(15deg);
+        opacity: 1;
+      }
+    }
+
+    /* Candle Smoke Trail */
+    .candle-smoke {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 80px;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .cake-stage.blown .candle-smoke {
+      animation: smokeRise 2.4s ease-out forwards;
     }
 
     @keyframes smokeRise {
       0% {
-        opacity: 0.7;
-        transform: translateX(-50%) translateY(10px) scale(0.6);
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px) scale(0.6);
       }
-
-      50% {
+      20% {
+        opacity: 0.85;
+      }
+      60% {
         opacity: 0.5;
-        transform: translateX(-40%) translateY(-25px) scale(1.4) skewX(-12deg);
+        transform: translateX(-40%) translateY(-25px) scale(1.3) skewX(-12deg);
       }
-
       100% {
         opacity: 0;
-        transform: translateX(-60%) translateY(-65px) scale(2.2) skewX(20deg);
+        transform: translateX(-60%) translateY(-75px) scale(2.2) skewX(18deg);
       }
     }
 
-    .cake-graphic.blown .candle-flame {
-      opacity: 0;
-      transform: translateX(-50%) scale(0.2);
+    /* Mic Button & Sound Waves */
+    .mic-button-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 4px;
     }
 
-    /* Wish Glow Overlay */
+    .sound-wave-bracket {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      font-size: 32px;
+      font-weight: 300;
+      color: #f472b6;
+      line-height: 1;
+      letter-spacing: -2px;
+      user-select: none;
+      animation: wavePulse 1.6s ease-in-out infinite alternate;
+      text-shadow: 0 0 10px rgba(244, 114, 182, 0.5);
+    }
+
+    .sound-wave-bracket span:nth-child(1) { opacity: 0.4; }
+    .sound-wave-bracket span:nth-child(2) { opacity: 0.75; }
+    .sound-wave-bracket span:nth-child(3) { opacity: 1; }
+
+    @keyframes wavePulse {
+      0% {
+        transform: scale(0.94);
+        opacity: 0.65;
+      }
+      100% {
+        transform: scale(1.06);
+        opacity: 1;
+      }
+    }
+
+    .btn-mic-glow {
+      background: linear-gradient(135deg, #f43f5e 0%, #e11d48 55%, #db2777 100%);
+      box-shadow: 0 10px 28px -4px rgba(225, 29, 72, 0.45), 0 0 24px rgba(244, 63, 94, 0.35);
+      border-radius: 9999px;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 15px 34px;
+      letter-spacing: 0.01em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .candle-hint-text {
+      font-size: 13.5px;
+      color: #835266;
+      margin-top: 8px;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    /* Wish Announcement Overlay */
     .wish-announcement {
       position: absolute;
-      inset: 0;
+      inset: -10px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.94) 0%, rgba(255, 245, 248, 0.88) 100%);
-      border-radius: 24px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.96) 0%, rgba(255, 240, 246, 0.92) 100%);
+      border-radius: 28px;
       opacity: 0;
       pointer-events: none;
       transform: scale(0.92);
-      transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
-      z-index: 20;
+      transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+      z-index: 25;
       padding: 24px;
       text-align: center;
-      box-shadow: 0 15px 40px rgba(180, 40, 80, 0.15);
+      box-shadow: 0 16px 45px rgba(180, 40, 80, 0.2);
     }
 
     .wish-announcement.show {
@@ -535,7 +673,7 @@
 
     .wish-title {
       font-family: var(--font-display);
-      font-size: clamp(28px, 6vw, 42px);
+      font-size: clamp(28px, 6vw, 40px);
       font-style: italic;
       color: var(--deep-wine);
       line-height: 1.25;
@@ -543,202 +681,572 @@
     }
 
     /* ========================================================
-       SCREEN 4: ROSE BOUQUET
+       SCREEN 4: FLOWER BOUQUET (SUNFLOWER PNG & CONVEX CARDS)
        ======================================================== */
     .bouquet-stage {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      width: min(92vw, 680px);
-      gap: 24px;
-      margin: 15px auto;
+      width: min(94vw, 760px);
+      gap: 28px;
+      margin: 10px auto;
+      perspective: 1000px;
     }
 
     @media (max-width: 680px) {
       .bouquet-stage {
         flex-direction: column;
-        gap: 16px;
+        gap: 18px;
       }
     }
 
     .bouquet-wrapper {
-      width: 220px;
-      height: 250px;
+      width: min(65vw, 270px);
+      aspect-ratio: 901 / 887;
       cursor: pointer;
       position: relative;
-      filter: drop-shadow(0 14px 24px rgba(160, 30, 60, 0.16));
-      transition: transform 0.2s ease;
+      filter: drop-shadow(0 18px 34px rgba(160, 30, 60, 0.22));
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
       flex-shrink: 0;
+      animation: bouquetOrganicFloat 5.2s ease-in-out infinite;
+    }
+
+    .bouquet-glow-aura {
+      position: absolute;
+      inset: -12px;
+      background: radial-gradient(circle, rgba(254, 240, 138, 0.55) 0%, rgba(251, 191, 36, 0.25) 45%, transparent 72%);
+      filter: blur(18px);
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
+      animation: auraPulse 3.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes auraPulse {
+      0% { transform: scale(0.92); opacity: 0.5; }
+      100% { transform: scale(1.1); opacity: 0.95; }
     }
 
     .bouquet-wrapper:hover {
-      transform: scale(1.05) rotate(1deg);
+      transform: scale(1.07) rotate(2.5deg);
     }
 
+    .bouquet-wrapper.bounce {
+      animation: bouquetBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes bouquetOrganicFloat {
+      0%, 100% {
+        transform: translateY(0px) rotate(-1.5deg) scale(1);
+      }
+      30% {
+        transform: translateY(-9px) rotate(1.8deg) scale(1.015);
+      }
+      65% {
+        transform: translateY(-3px) rotate(-0.8deg) scale(0.995);
+      }
+      85% {
+        transform: translateY(-6px) rotate(0.6deg) scale(1.01);
+      }
+    }
+
+    @keyframes bouquetBounce {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.15) rotate(3.5deg); }
+      65% { transform: scale(0.95) rotate(-1.5deg); }
+      100% { transform: scale(1); }
+    }
+
+    .bouquet-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    .bouquet-sparkle {
+      position: absolute;
+      font-size: 20px;
+      pointer-events: none;
+      z-index: 2;
+      animation: sparkleGlow 2.2s ease-in-out infinite alternate;
+    }
+
+    .b-sp-1 {
+      top: 6%;
+      left: -8px;
+      animation-delay: 0.2s;
+    }
+
+    .b-sp-2 {
+      top: 20%;
+      right: -8px;
+      animation-delay: 0.8s;
+    }
+
+    .b-sp-3 {
+      bottom: 24%;
+      left: -4px;
+      animation-delay: 1.4s;
+      font-size: 22px;
+    }
+
+    .b-sp-4 {
+      bottom: 10%;
+      right: -4px;
+      animation-delay: 1.9s;
+      font-size: 19px;
+    }
+
+    @keyframes sparkleGlow {
+      0% { opacity: 0.35; transform: scale(0.75) rotate(0deg); }
+      100% { opacity: 1; transform: scale(1.25) rotate(22deg); }
+    }
+
+    /* Convex Message Column */
     .notes-column {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      width: min(88vw, 320px);
+      gap: 18px;
+      width: min(88vw, 360px);
+      perspective: 1000px;
+      position: relative;
     }
 
     .love-card {
       background: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(220, 150, 175, 0.35);
-      border-radius: 18px;
-      padding: 14px 18px;
-      box-shadow: 0 8px 24px rgba(180, 40, 80, 0.08);
-      font-size: 14px;
+      border: 1px solid rgba(254, 205, 220, 0.7);
+      border-radius: 22px;
+      padding: 15px 20px;
+      box-shadow: 0 12px 28px rgba(180, 40, 80, 0.1), 0 1px 3px rgba(255, 255, 255, 0.9) inset;
+      font-size: 15px;
       font-weight: 600;
       color: var(--deep-wine);
       line-height: 1.45;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 14px;
       opacity: 0;
-      transform: translateX(25px) scale(0.95);
-      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: translateX(65px) scale(0.85);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.34, 1.4, 0.64, 1), box-shadow 0.3s ease;
+      backdrop-filter: blur(12px);
+      position: relative;
+      cursor: default;
+      overflow: hidden;
     }
 
-    .love-card.pop-in {
+    /* Glossy reflection shimmer sweep on card reveal */
+    .love-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -130%;
+      width: 80%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+      transform: skewX(-25deg);
+      pointer-events: none;
+    }
+
+    .love-card.pop-in::after {
+      animation: cardShimmer 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.35s forwards;
+    }
+
+    @keyframes cardShimmer {
+      0% { left: -130%; }
+      100% { left: 230%; }
+    }
+
+    .love-card span {
+      font-size: 24px;
+      flex-shrink: 0;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.08));
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .love-card.pop-in span {
+      animation: emojiSpring 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes emojiSpring {
+      0% { transform: scale(0) rotate(-35deg); }
+      60% { transform: scale(1.35) rotate(14deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    /* Convex Arc Positioning:
+       Card 1 curves inwards (-3deg, rotateY 6deg).
+       Card 2 bulges prominently outward (+48px, rotate 0deg, scale 1.03, translateZ 16px).
+       Card 3 curves inwards (+3deg, rotateY -6deg).
+       This forms a distinct, striking 3D convex arc. */
+    .love-card:nth-child(1).pop-in {
       opacity: 1;
-      transform: translateX(0) scale(1);
+      transform: translateX(0px) rotateZ(-3deg) rotateY(6deg);
+      animation: noteFloat1 4.5s ease-in-out infinite 0.9s;
+    }
+
+    .love-card:nth-child(2).pop-in {
+      opacity: 1;
+      transform: translateX(48px) rotateZ(0deg) scale(1.03) translateZ(16px);
+      box-shadow: 0 16px 36px rgba(180, 40, 80, 0.14), 0 2px 5px rgba(255, 255, 255, 0.9) inset;
+      animation: noteFloat2 4.8s ease-in-out infinite 1.4s;
+    }
+
+    .love-card:nth-child(3).pop-in {
+      opacity: 1;
+      transform: translateX(0px) rotateZ(3deg) rotateY(-6deg);
+      animation: noteFloat3 4.4s ease-in-out infinite 1.9s;
+    }
+
+    @keyframes noteFloat1 {
+      0%, 100% {
+        transform: translateX(0px) rotateZ(-3deg) rotateY(6deg) translateY(0);
+      }
+      50% {
+        transform: translateX(0px) rotateZ(-3deg) rotateY(6deg) translateY(-5px);
+      }
+    }
+
+    @keyframes noteFloat2 {
+      0%, 100% {
+        transform: translateX(48px) rotateZ(0deg) scale(1.03) translateZ(16px) translateY(0);
+      }
+      50% {
+        transform: translateX(48px) rotateZ(0deg) scale(1.03) translateZ(16px) translateY(-6px);
+      }
+    }
+
+    @keyframes noteFloat3 {
+      0%, 100% {
+        transform: translateX(0px) rotateZ(3deg) rotateY(-6deg) translateY(0);
+      }
+      50% {
+        transform: translateX(0px) rotateZ(3deg) rotateY(-6deg) translateY(-5px);
+      }
+    }
+
+    .love-card:hover {
+      animation-play-state: paused;
+      box-shadow: 0 20px 42px rgba(245, 158, 11, 0.25), 0 0 16px rgba(254, 240, 138, 0.45);
+      filter: brightness(1.02);
+    }
+
+    @media (max-width: 680px) {
+      .love-card:nth-child(1).pop-in {
+        transform: translateX(-4px) rotate(-1.5deg);
+      }
+      .love-card:nth-child(2).pop-in {
+        transform: translateX(20px) rotate(0deg) scale(1.02);
+      }
+      .love-card:nth-child(3).pop-in {
+        transform: translateX(-4px) rotate(1.5deg);
+      }
+      @keyframes noteFloat1 {
+        0%, 100% { transform: translateX(-4px) rotate(-1.5deg) translateY(0); }
+        50% { transform: translateX(-4px) rotate(-1.5deg) translateY(-4px); }
+      }
+      @keyframes noteFloat2 {
+        0%, 100% { transform: translateX(20px) rotate(0deg) scale(1.02) translateY(0); }
+        50% { transform: translateX(20px) rotate(0deg) scale(1.02) translateY(-5px); }
+      }
+      @keyframes noteFloat3 {
+        0%, 100% { transform: translateX(-4px) rotate(1.5deg) translateY(0); }
+        50% { transform: translateX(-4px) rotate(1.5deg) translateY(-4px); }
+      }
+    }
+
+    .btn-bouquet-ready {
+      animation: buttonPulseGlow 2.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes buttonPulseGlow {
+      0% {
+        box-shadow: 0 10px 25px -4px rgba(214, 51, 108, 0.38);
+        transform: scale(1);
+      }
+      100% {
+        box-shadow: 0 14px 34px 2px rgba(214, 51, 108, 0.55), 0 0 20px rgba(251, 191, 36, 0.35);
+        transform: scale(1.04);
+      }
     }
 
     /* ========================================================
-       SCREEN 5: ENVELOPE & HEARTFELT LETTER
+       SCREEN 5: LUXURY ENVELOPE & HEARTFELT LETTER
        ======================================================== */
-    .envelope-box {
-      width: min(90vw, 390px);
-      height: 250px;
+    #screen5 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       position: relative;
-      perspective: 1200px;
-      margin: 15px auto 25px;
+      padding: 10px 16px 24px;
+    }
+
+    .envelope-box {
+      width: min(88vw, 370px);
+      height: 236px;
+      position: relative;
+      perspective: 1400px;
+      margin: 32px auto 22px;
       cursor: pointer;
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .envelope-box:hover {
+      transform: translateY(-4px) scale(1.015);
+    }
+
+    .envelope-box:active {
+      transform: scale(0.985);
     }
 
     .env-wrapper {
       position: relative;
       width: 100%;
       height: 100%;
-      border-radius: 14px;
-      box-shadow: 0 20px 45px rgba(140, 40, 70, 0.18);
+      border-radius: 18px;
+      box-shadow: 
+        0 18px 45px -8px rgba(160, 50, 80, 0.22),
+        0 6px 18px rgba(0, 0, 0, 0.05);
+      transform-style: preserve-3d;
     }
 
-    /* Envelope 3D Construction */
-    .env-back {
+    /* 1. Envelope Back Plate & Interior Lining */
+    .env-back-plate {
       position: absolute;
       inset: 0;
-      background: #fbf0e8;
-      border-radius: 12px;
-      border: 1.5px solid #e8c8b8;
+      width: 100%;
+      height: 100%;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #fbeee7 0%, #f6e2da 50%, #f2d7d0 100%);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      overflow: hidden;
+      z-index: 1;
+      box-shadow: inset 0 3px 12px rgba(120, 45, 60, 0.12);
     }
 
+    .env-pocket-texture {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.5) 0%, rgba(230, 185, 180, 0.15) 100%);
+      pointer-events: none;
+    }
+
+    /* 2. Inner Letter Card that rises up upon opening */
     .env-inner-note {
       position: absolute;
-      left: 7%;
-      top: 10%;
-      width: 86%;
-      height: 80%;
+      left: 6%;
+      top: 8%;
+      width: 88%;
+      height: 84%;
       background: #ffffff;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-      transform: translateY(0);
-      transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+      border-radius: 12px;
+      box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(220, 160, 180, 0.3);
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transform: translateY(0) scale(0.98);
+      transition: transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.85s ease;
       z-index: 2;
+      pointer-events: none;
     }
 
-    .env-front-left {
+    .note-card-inner {
+      width: 100%;
+      height: 100%;
+      border: 1px dashed rgba(212, 175, 55, 0.55);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      background: radial-gradient(circle, #ffffff 60%, #fffaf5 100%);
+    }
+
+    .note-stamp {
+      font-size: 22px;
+      color: #d6336c;
+      margin-bottom: 4px;
+      filter: drop-shadow(0 2px 4px rgba(214, 51, 108, 0.25));
+    }
+
+    .note-text-line {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+      color: #6a2538;
+      letter-spacing: 0.02em;
+    }
+
+    .note-sub-line {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      color: #9d5068;
+      letter-spacing: 0.08em;
+      margin-top: 3px;
+      text-transform: uppercase;
+    }
+
+    /* 3. Front Ivory Body with Curved Seams & Gold Piping */
+    .env-front-body {
       position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 0;
-      border-left: 195px solid #fff3eb;
-      border-top: 125px solid transparent;
-      border-bottom: 125px solid #fff3eb;
-      border-radius: 0 0 0 12px;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       z-index: 3;
-      filter: drop-shadow(2px 0 3px rgba(0, 0, 0, 0.02));
+      pointer-events: none;
     }
 
-    .env-front-right {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      width: 0;
-      height: 0;
-      border-right: 195px solid #ffece1;
-      border-top: 125px solid transparent;
-      border-bottom: 125px solid #ffece1;
-      border-radius: 0 0 12px 0;
-      z-index: 3;
-      filter: drop-shadow(-2px 0 3px rgba(0, 0, 0, 0.02));
+    .env-front-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
     }
 
-    .env-front-bottom {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      width: 0;
-      height: 0;
-      margin: auto;
-      border-bottom: 130px solid #fce3d5;
-      border-left: 195px solid transparent;
-      border-right: 195px solid transparent;
-      border-radius: 0 0 12px 12px;
-      z-index: 4;
-    }
-
-    .env-flap {
+    /* 4. Top Flap with 3D Rotation, Blush Pink Satin & Metallic Gold Trim */
+    .env-flap-container {
       position: absolute;
       top: 0;
       left: 0;
-      right: 0;
-      margin: auto;
-      width: 0;
-      height: 0;
-      border-top: 135px solid #f9d8c6;
-      border-left: 195px solid transparent;
-      border-right: 195px solid transparent;
-      transform-origin: top center;
-      transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.2s;
+      width: 100%;
+      height: 100%;
+      perspective: 1400px;
       z-index: 5;
+      pointer-events: none;
+      transition: z-index 0.3s step-end;
     }
 
-    .envelope-box.opened .env-flap {
+    .envelope-box.opened .env-flap-container {
+      z-index: 1;
+      transition: z-index 0.3s step-start;
+    }
+
+    .env-flap-flipper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-origin: top center;
+      transform-style: preserve-3d;
+      transition: transform 0.85s cubic-bezier(0.35, 0, 0.15, 1);
+    }
+
+    .envelope-box.opened .env-flap-flipper {
+      transform: rotateX(180deg);
+    }
+
+    .envelope-box.opened .env-inner-note {
+      transform: translateY(-90px) scale(1.02);
+      box-shadow: 
+        0 20px 40px rgba(100, 25, 45, 0.22),
+        0 0 0 1px rgba(212, 175, 55, 0.5);
+    }
+
+    .env-flap-face {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    .env-flap-face.env-flap-front {
+      z-index: 2;
+    }
+
+    .env-flap-face.env-flap-back {
       transform: rotateX(180deg);
       z-index: 1;
     }
 
-    .envelope-box.opened .env-inner-note {
-      transform: translateY(-80px) scale(1.02);
+    .env-flap-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
     }
 
-    .wax-seal {
-      position: absolute;
-      top: 110px;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #e6396e 0%, #b81e4b 100%);
-      box-shadow: 0 4px 12px rgba(184, 30, 75, 0.4), 0 0 0 2px #ffb3c9 inset;
+    /* "TAP TO OPEN" Prompt below envelope matching reference photo */
+    .envelope-tap-prompt {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 12px;
+      cursor: pointer;
+      user-select: none;
+      padding: 8px 18px;
+      border-radius: 20px;
+      transition: all 0.25s ease;
+      background: transparent;
+      border: none;
+      outline: none;
+    }
+
+    .envelope-tap-prompt:hover {
+      transform: translateY(-2px);
+    }
+
+    .envelope-tap-prompt:active {
+      transform: scale(0.96);
+    }
+
+    .prompt-label {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      color: #983854;
+      text-transform: uppercase;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+      transition: color 0.2s ease;
+    }
+
+    .envelope-tap-prompt:hover .prompt-label {
+      color: #bd2d58;
+    }
+
+    .tap-pointer-wrap {
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
-      font-size: 20px;
-      z-index: 6;
-      transition: all 0.4s ease;
+      width: 26px;
+      height: 26px;
+      animation: pointerTapBounce 1.5s ease-in-out infinite;
     }
 
-    .envelope-box.opened .wax-seal {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0.5);
+    @keyframes pointerTapBounce {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+      40% {
+        transform: translateY(-5px) scale(1.08);
+      }
+      60% {
+        transform: translateY(-2px) scale(0.96);
+      }
+    }
+
+    .pointer-icon {
+      width: 22px;
+      height: 22px;
+      filter: drop-shadow(0 2px 4px rgba(120, 30, 55, 0.25));
     }
 
     /* Modal / Expanded Letter View */
@@ -751,7 +1259,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px 14px;
+      padding: 16px 12px;
+      box-sizing: border-box;
       opacity: 0;
       visibility: hidden;
       transition: all 0.5s ease;
@@ -763,13 +1272,15 @@
     }
 
     .letter-sheet {
-      width: min(94vw, 540px);
+      width: min(92vw, 520px);
+      max-width: calc(100vw - 20px);
+      box-sizing: border-box;
       max-height: 85vh;
       background: #fffdfa;
       border-radius: 18px;
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.28);
       border: 1px solid #ebd7cb;
-      padding: 36px 30px 30px;
+      padding: 36px 28px 28px;
       position: relative;
       overflow-y: auto;
       transform: translateY(30px) scale(0.95);
@@ -778,6 +1289,33 @@
 
     .letter-modal.active .letter-sheet {
       transform: translateY(0) scale(1);
+    }
+
+    .letter-close-btn {
+      position: absolute;
+      top: 16px;
+      left: 18px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      background: #ffffff;
+      color: #983854;
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+
+    .letter-close-btn:hover {
+      background: #fff0f5;
+      color: #b81e4b;
+      transform: scale(1.08);
     }
 
     .stamp-decor {
@@ -829,6 +1367,42 @@
       font-size: 28px;
       color: var(--deep-wine);
       text-align: right;
+      white-space: pre-line;
+      line-height: 1.35;
+    }
+
+    @media (max-width: 480px) {
+      .letter-modal {
+        padding: 14px 8px;
+      }
+      .letter-sheet {
+        padding: 32px 18px 24px;
+        width: calc(100vw - 16px);
+        max-width: calc(100vw - 16px);
+      }
+      .stamp-decor {
+        top: 14px;
+        right: 14px;
+        width: 44px;
+        height: 52px;
+        font-size: 18px;
+      }
+      .letter-body-content {
+        font-size: 16px;
+        line-height: 1.55;
+      }
+      .letter-body-content h3 {
+        font-size: 21px;
+        margin-bottom: 10px;
+        padding-right: 46px;
+      }
+      .letter-body-content p {
+        margin-bottom: 11px;
+      }
+      .letter-signature {
+        font-size: 23px;
+        margin-top: 18px;
+      }
     }
 
     /* ========================================================
@@ -992,94 +1566,35 @@
       <div class="subtitle-text">Tap each floating balloon to reveal a secret word ✨</div>
 
       <div class="balloon-stage">
-        <!-- Balloon 1 (Blue -> "You") -->
+        <!-- Balloon 1 (Cute Blue -> "You") -->
         <div class="balloon-slot b-slot-1">
           <div class="revealed-word" id="word0">You</div>
-          <div class="balloon-item" id="balloon0" data-index="0">
-            <svg viewBox="0 0 100 160" width="100%" height="100%">
-              <!-- Ribbon String -->
-              <path d="M 50 110 Q 40 130 55 145 T 45 160" stroke="#a0aec0" stroke-width="1.8" fill="none" />
-              <!-- Balloon Body (Pastel Sky Blue) -->
-              <path
-                d="M 50 10 C 20 10 10 45 10 70 C 10 98 40 108 47 110 L 45 116 L 55 116 L 53 110 C 60 108 90 98 90 70 C 90 45 80 10 50 10 Z"
-                fill="url(#blueBalloonGrad)" />
-              <!-- Highlight Reflection -->
-              <path d="M 28 25 C 20 35 20 55 24 68 C 21 60 21 40 33 28 C 36 25 32 23 28 25 Z" fill="#ffffff"
-                opacity="0.65" />
-              <defs>
-                <radialGradient id="blueBalloonGrad" cx="35%" cy="35%" r="65%">
-                  <stop offset="0%" stop-color="#bae6fd" />
-                  <stop offset="60%" stop-color="#60a5fa" />
-                  <stop offset="100%" stop-color="#3b82f6" />
-                </radialGradient>
-              </defs>
-            </svg>
+          <div class="balloon-item" id="balloon0" data-index="0" title="Tap to pop!">
+            <img src="assets/cute-balloon-0.png" class="balloon-img" alt="Cute Blue Balloon" draggable="false" />
           </div>
         </div>
 
-        <!-- Balloon 2 (Pink -> "are") -->
+        <!-- Balloon 2 (Cute Pink -> "are") -->
         <div class="balloon-slot b-slot-2">
           <div class="revealed-word" id="word1">are</div>
-          <div class="balloon-item" id="balloon1" data-index="1">
-            <svg viewBox="0 0 100 160" width="100%" height="100%">
-              <path d="M 50 110 Q 60 128 45 142 T 52 160" stroke="#cbd5e1" stroke-width="1.8" fill="none" />
-              <path
-                d="M 50 10 C 20 10 10 45 10 70 C 10 98 40 108 47 110 L 45 116 L 55 116 L 53 110 C 60 108 90 98 90 70 C 90 45 80 10 50 10 Z"
-                fill="url(#pinkBalloonGrad)" />
-              <path d="M 28 25 C 20 35 20 55 24 68 C 21 60 21 40 33 28 C 36 25 32 23 28 25 Z" fill="#ffffff"
-                opacity="0.65" />
-              <defs>
-                <radialGradient id="pinkBalloonGrad" cx="35%" cy="35%" r="65%">
-                  <stop offset="0%" stop-color="#fbcfe8" />
-                  <stop offset="60%" stop-color="#f472b6" />
-                  <stop offset="100%" stop-color="#e11d48" />
-                </radialGradient>
-              </defs>
-            </svg>
+          <div class="balloon-item" id="balloon1" data-index="1" title="Tap to pop!">
+            <img src="assets/cute-balloon-1.png" class="balloon-img" alt="Cute Pink Balloon" draggable="false" />
           </div>
         </div>
 
-        <!-- Balloon 3 (Green -> "so") -->
+        <!-- Balloon 3 (Cute Yellow -> "so") -->
         <div class="balloon-slot b-slot-3">
           <div class="revealed-word" id="word2">so</div>
-          <div class="balloon-item" id="balloon2" data-index="2">
-            <svg viewBox="0 0 100 160" width="100%" height="100%">
-              <path d="M 50 110 Q 38 128 52 144 T 46 160" stroke="#a0aec0" stroke-width="1.8" fill="none" />
-              <path
-                d="M 50 10 C 20 10 10 45 10 70 C 10 98 40 108 47 110 L 45 116 L 55 116 L 53 110 C 60 108 90 98 90 70 C 90 45 80 10 50 10 Z"
-                fill="url(#greenBalloonGrad)" />
-              <path d="M 28 25 C 20 35 20 55 24 68 C 21 60 21 40 33 28 C 36 25 32 23 28 25 Z" fill="#ffffff"
-                opacity="0.65" />
-              <defs>
-                <radialGradient id="greenBalloonGrad" cx="35%" cy="35%" r="65%">
-                  <stop offset="0%" stop-color="#bbf7d0" />
-                  <stop offset="60%" stop-color="#4ade80" />
-                  <stop offset="100%" stop-color="#16a34a" />
-                </radialGradient>
-              </defs>
-            </svg>
+          <div class="balloon-item" id="balloon2" data-index="2" title="Tap to pop!">
+            <img src="assets/cute-balloon-2.png" class="balloon-img" alt="Cute Yellow Balloon" draggable="false" />
           </div>
         </div>
 
-        <!-- Balloon 4 (Purple -> "special") -->
+        <!-- Balloon 4 (Cute Cyan -> "special") -->
         <div class="balloon-slot b-slot-4">
           <div class="revealed-word" id="word3">special</div>
-          <div class="balloon-item" id="balloon3" data-index="3">
-            <svg viewBox="0 0 100 160" width="100%" height="100%">
-              <path d="M 50 110 Q 62 130 48 145 T 54 160" stroke="#cbd5e1" stroke-width="1.8" fill="none" />
-              <path
-                d="M 50 10 C 20 10 10 45 10 70 C 10 98 40 108 47 110 L 45 116 L 55 116 L 53 110 C 60 108 90 98 90 70 C 90 45 80 10 50 10 Z"
-                fill="url(#purpleBalloonGrad)" />
-              <path d="M 28 25 C 20 35 20 55 24 68 C 21 60 21 40 33 28 C 36 25 32 23 28 25 Z" fill="#ffffff"
-                opacity="0.65" />
-              <defs>
-                <radialGradient id="purpleBalloonGrad" cx="35%" cy="35%" r="65%">
-                  <stop offset="0%" stop-color="#e9d5ff" />
-                  <stop offset="60%" stop-color="#a855f7" />
-                  <stop offset="100%" stop-color="#7e22ce" />
-                </radialGradient>
-              </defs>
-            </svg>
+          <div class="balloon-item" id="balloon3" data-index="3" title="Tap to pop!">
+            <img src="assets/cute-balloon-3.png" class="balloon-img" alt="Cute Cyan Balloon" draggable="false" />
           </div>
         </div>
       </div>
@@ -1088,67 +1603,51 @@
     </section>
 
     <!-- ========================================================
-         SCREEN 3: BLOW THE CANDLE
+         SCREEN 3: BLOW THE CANDLE (SCREENSHOT REPLICA)
          ======================================================== -->
     <section id="screen3" class="screen">
-      <h2 class="title-banner" id="s3Title">Blow the candle, Pupu 🎂💖</h2>
-      <div class="subtitle-text" id="s3Hint">Make a heartfelt birthday wish!</div>
+      <!-- Decorative Arched Flourish with Heart -->
+      <div class="s3-flourish" aria-hidden="true">
+        <svg width="180" height="26" viewBox="0 0 180 26" fill="none">
+          <path d="M 8 20 C 35 4, 65 5, 82 14 C 86 16, 90 16, 94 14 C 112 5, 142 4, 172 20" stroke="#f472b6" stroke-width="1.8" stroke-linecap="round" />
+          <path d="M 124 10 C 121 5, 115 6, 113 9 C 111 12, 115 15, 120 19 C 125 15, 129 12, 127 9 C 125 6, 119 5, 116 10" stroke="#f43f5e" stroke-width="1.5" fill="none" opacity="0.8" />
+          <path d="M 88 12 C 86 9, 82 9, 80 11 C 78 13, 82 17, 88 21 C 94 17, 98 13, 96 11 C 94 9, 90 9, 88 12 Z" fill="#f43f5e" />
+        </svg>
+      </div>
 
-      <div class="cake-scene">
-        <div class="cake-graphic" id="cakeStandInteractive">
-          <!-- Animated Flame -->
-          <div class="candle-flame" id="candleFlame"></div>
+      <h2 class="title-banner s3-title" id="s3Title">Blow the candle, Pupu 🎂💖</h2>
+
+      <div class="subtitle-text s3-subtitle" id="s3Hint">
+        <svg width="34" height="12" viewBox="0 0 34 12" fill="none" style="opacity: 0.7;">
+          <path d="M 2 10 Q 18 2 30 8" stroke="#f472b6" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span class="sub-heart">❤</span> Make a heartfelt birthday wish! <span class="sub-heart">❤</span>
+        <svg width="34" height="12" viewBox="0 0 34 12" fill="none" style="opacity: 0.7;">
+          <path d="M 32 10 Q 16 2 4 8" stroke="#f472b6" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <div class="cake-scene" id="cakeScene">
+        <div class="cake-stage" id="cakeStandInteractive" title="Tap candle to blow!">
+          <!-- Lit Cake from Screenshot with glowing aura -->
+          <img src="assets/pink-cake-transparent.png" alt="Birthday Strawberry Cake" class="cake-img cake-img-lit" draggable="false" />
+          
+          <!-- Extinguished Unlit Cake -->
+          <img src="assets/pink-cake-unlit.png" alt="Birthday Cake Unlit" class="cake-img cake-img-unlit" draggable="false" />
+
+          <!-- Twinkling Star Sparkles -->
+          <span class="cake-star star-1">✦</span>
+          <span class="cake-star star-2">✦</span>
+          <span class="cake-star star-3">✦</span>
+          <span class="cake-star star-4">✦</span>
+
           <!-- Smoke Trail when blown -->
           <div class="candle-smoke" id="candleSmoke">
-            <svg viewBox="0 0 40 80" width="100%" height="100%">
-              <path d="M 20 70 Q 10 50 25 35 T 15 10" stroke="#94a3b8" stroke-width="3" fill="none"
-                stroke-linecap="round" />
+            <svg viewBox="0 0 40 90" width="100%" height="100%">
+              <path d="M 20 85 Q 12 60 28 40 T 14 8" stroke="rgba(148, 163, 184, 0.85)" stroke-width="3.5" fill="none" stroke-linecap="round" />
+              <path d="M 20 85 Q 26 65 16 45 T 24 12" stroke="rgba(203, 213, 225, 0.6)" stroke-width="2.2" fill="none" stroke-linecap="round" />
             </svg>
           </div>
-
-          <!-- Birthday Cake Illustration -->
-          <svg viewBox="0 0 300 250" width="100%" height="100%">
-            <!-- Ornate Cake Pedestal -->
-            <ellipse cx="150" cy="235" rx="85" ry="12" fill="#e2e8f0" />
-            <path d="M 140 230 L 140 215 L 160 215 L 160 230 Z" fill="#cbd5e1" />
-            <ellipse cx="150" cy="215" rx="100" ry="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
-
-            <!-- Bottom Tier of Cake -->
-            <path d="M 70 160 C 70 145 230 145 230 160 L 230 205 C 230 220 70 220 70 205 Z" fill="url(#cakeTierGrad)" />
-            <ellipse cx="150" cy="160" rx="80" ry="15" fill="#fff1f2" />
-            <!-- Cream Swirls -->
-            <path
-              d="M 70 160 Q 85 178 100 165 Q 115 178 130 165 Q 145 178 160 165 Q 175 178 190 165 Q 205 178 220 165 Q 230 174 230 160"
-              stroke="#f472b6" stroke-width="8" fill="none" stroke-linecap="round" />
-
-            <!-- Top Tier of Cake -->
-            <path d="M 95 115 C 95 102 205 102 205 115 L 205 152 C 205 165 95 165 95 152 Z" fill="#ffe4e6" />
-            <ellipse cx="150" cy="115" rx="55" ry="12" fill="#ffffff" />
-            <path d="M 95 115 Q 110 128 125 118 Q 140 128 155 118 Q 170 128 185 118 Q 195 125 205 115" stroke="#fb7185"
-              stroke-width="6" fill="none" stroke-linecap="round" />
-
-            <!-- Topping Cherries / Strawberries -->
-            <circle cx="120" cy="112" r="7" fill="#e11d48" />
-            <circle cx="150" cy="110" r="7.5" fill="#e11d48" />
-            <circle cx="180" cy="112" r="7" fill="#e11d48" />
-
-            <!-- Lit Candle -->
-            <rect x="146.5" y="44" width="7" height="66" fill="url(#candlePattern)" rx="3" />
-            <!-- Wick -->
-            <line x1="150" y1="44" x2="150" y2="35" stroke="#334155" stroke-width="2" />
-
-            <defs>
-              <linearGradient id="cakeTierGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#fed7aa" />
-                <stop offset="100%" stop-color="#fdba74" />
-              </linearGradient>
-              <linearGradient id="candlePattern" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#fed7e2" />
-                <stop offset="50%" stop-color="#ffffff" />
-                <stop offset="100%" stop-color="#f472b6" />
-              </linearGradient>
-            </defs>
-          </svg>
         </div>
 
         <!-- Wish Announcement Overlay -->
@@ -1158,95 +1657,50 @@
         </div>
       </div>
 
-      <button id="btnBlowMic" class="btn-pill" style="margin-top: 18px;">
-        🎤 Blow into the mic
-      </button>
-      <div style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">(or tap the candle directly to blow)
+      <!-- Glowing Mic Button with Sound Wave Brackets -->
+      <div class="mic-button-wrapper">
+        <div class="sound-wave-bracket wave-left" aria-hidden="true">
+          <span>(</span><span>(</span><span>(</span>
+        </div>
+
+        <button id="btnBlowMic" class="btn-pill btn-mic-glow">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="display:inline-block; vertical-align:middle; margin-right:4px;">
+            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+          </svg>
+          Blow into the mic
+        </button>
+
+        <div class="sound-wave-bracket wave-right" aria-hidden="true">
+          <span>)</span><span>)</span><span>)</span>
+        </div>
       </div>
+
+      <div class="candle-hint-text">(or tap the candle directly to blow)</div>
     </section>
 
     <!-- ========================================================
-         SCREEN 4: ROSE BOUQUET
+         SCREEN 4: FLOWER BOUQUET (SUNFLOWER PNG)
          ======================================================== -->
     <section id="screen4" class="screen">
-      <h2 class="title-banner" id="s4Title">Your Rose Bouquet 🌹</h2>
+      <h2 class="title-banner" id="s4Title">Your Flower Bouquet 🌻</h2>
       <div class="subtitle-text" id="s4Hint">Tap the bouquet for little notes 💐</div>
 
       <div class="bouquet-stage">
-        <!-- Lush Rose Bouquet SVG -->
-        <div class="bouquet-wrapper" id="roseBouquet">
-          <svg viewBox="0 0 300 340" width="100%" height="100%">
-            <!-- Wrap Kraft Paper / Tissue -->
-            <path d="M 60 170 L 120 320 L 180 320 L 240 170 Q 150 140 60 170 Z" fill="#fce7d8" stroke="#e8c7b0"
-              stroke-width="2" />
-            <path d="M 85 165 L 135 320 L 165 320 L 215 165 Q 150 148 85 165 Z" fill="#fff5ee" />
-
-            <!-- Green Stems & Eucalyptus Leaves -->
-            <path d="M 90 120 Q 70 80 85 60 Q 110 70 95 110 Z" fill="#4d7c0f" />
-            <path d="M 210 120 Q 230 80 215 60 Q 190 70 205 110 Z" fill="#4d7c0f" />
-            <path d="M 150 100 Q 140 50 155 40 Q 170 50 155 95 Z" fill="#65a30d" />
-
-            <!-- Layered Red Velvet Roses -->
-            <!-- Rose 1 (Top Left) -->
-            <g transform="translate(100, 75)">
-              <circle cx="0" cy="0" r="28" fill="#9f1239" />
-              <path d="M -18 -8 C -10 -22 10 -22 18 -8 C 22 12 -22 12 -18 -8 Z" fill="#be123c" />
-              <path d="M -10 -4 C -5 -12 5 -12 10 -4 C 12 8 -12 8 -10 -4 Z" fill="#e11d48" />
-              <circle cx="0" cy="0" r="5" fill="#fb7185" />
-            </g>
-            <!-- Rose 2 (Top Right) -->
-            <g transform="translate(195, 80)">
-              <circle cx="0" cy="0" r="27" fill="#881337" />
-              <path d="M -16 -8 C -8 -20 8 -20 16 -8 C 20 10 -20 10 -16 -8 Z" fill="#be123c" />
-              <path d="M -8 -4 C -4 -10 4 -10 8 -4 C 10 6 -10 6 -8 -4 Z" fill="#e11d48" />
-              <circle cx="0" cy="0" r="5" fill="#f43f5e" />
-            </g>
-            <!-- Rose 3 (Center High) -->
-            <g transform="translate(150, 50)">
-              <circle cx="0" cy="0" r="30" fill="#be123c" />
-              <path d="M -18 -10 C -10 -24 10 -24 18 -10 C 22 14 -22 14 -18 -10 Z" fill="#e11d48" />
-              <path d="M -10 -5 C -5 -14 5 -14 10 -5 C 12 8 -12 8 -10 -5 Z" fill="#f43f5e" />
-              <circle cx="0" cy="0" r="6" fill="#fda4af" />
-            </g>
-            <!-- Rose 4 (Center Low) -->
-            <g transform="translate(150, 115)">
-              <circle cx="0" cy="0" r="32" fill="#9f1239" />
-              <path d="M -20 -10 C -10 -26 10 -26 20 -10 C 24 16 -24 16 -20 -10 Z" fill="#be123c" />
-              <path d="M -12 -6 C -6 -16 6 -16 12 -6 C 14 10 -14 10 -12 -6 Z" fill="#e11d48" />
-              <circle cx="0" cy="0" r="6.5" fill="#f43f5e" />
-            </g>
-            <!-- Rose 5 (Left) -->
-            <g transform="translate(70, 125)">
-              <circle cx="0" cy="0" r="26" fill="#881337" />
-              <path d="M -16 -8 C -8 -20 8 -20 16 -8 C 20 10 -20 10 -16 -8 Z" fill="#be123c" />
-              <circle cx="0" cy="0" r="5" fill="#e11d48" />
-            </g>
-            <!-- Rose 6 (Right) -->
-            <g transform="translate(225, 125)">
-              <circle cx="0" cy="0" r="26" fill="#9f1239" />
-              <path d="M -16 -8 C -8 -20 8 -20 16 -8 C 20 10 -20 10 -16 -8 Z" fill="#be123c" />
-              <circle cx="0" cy="0" r="5" fill="#e11d48" />
-            </g>
-
-            <!-- Satin Red Ribbon Bow -->
-            <g transform="translate(150, 215)">
-              <!-- Left Loop -->
-              <path d="M 0 0 C -35 -25 -50 15 -10 10 Z" fill="#dc2626" />
-              <!-- Right Loop -->
-              <path d="M 0 0 C 35 -25 50 15 10 10 Z" fill="#dc2626" />
-              <!-- Tails -->
-              <path d="M -5 5 C -20 25 -30 65 -40 70 C -32 50 -15 30 0 10 Z" fill="#b91c1c" />
-              <path d="M 5 5 C 20 25 30 65 40 70 C 32 50 15 30 0 10 Z" fill="#b91c1c" />
-              <!-- Knot -->
-              <circle cx="0" cy="3" r="10" fill="#ef4444" />
-            </g>
-          </svg>
+        <!-- Gorgeous Isolated Sunflower Bouquet PNG with Aura & Sparkles -->
+        <div class="bouquet-wrapper" id="roseBouquet" title="Tap bouquet for notes!">
+          <div class="bouquet-glow-aura" aria-hidden="true"></div>
+          <img src="assets/sunflower-bouquet.png" alt="Sunflower Bouquet" class="bouquet-img" draggable="false" />
+          <span class="bouquet-sparkle b-sp-1">✨</span>
+          <span class="bouquet-sparkle b-sp-2">✨</span>
+          <span class="bouquet-sparkle b-sp-3">🌻</span>
+          <span class="bouquet-sparkle b-sp-4">💛</span>
         </div>
 
         <!-- Pop-in Compliments Column -->
         <div class="notes-column">
           <div class="love-card" id="note0">
-            <span>✨</span>
+            <span>🌻</span>
             <div id="noteText0">You make my world beautiful 💖</div>
           </div>
           <div class="love-card" id="note1">
@@ -1254,7 +1708,7 @@
             <div id="noteText1">Happy Birthday Pupu 🎂💖</div>
           </div>
           <div class="love-card" id="note2">
-            <span>🌸</span>
+            <span>✨</span>
             <div id="noteText2">Stay just the way you are! You're my favorite person 🌸</div>
           </div>
         </div>
@@ -1267,27 +1721,207 @@
          SCREEN 5: ENVELOPE & HEARTFELT LETTER
          ======================================================== -->
     <section id="screen5" class="screen">
-      <h2 class="title-banner" id="s5Title">A Message From My Heart</h2>
-      <div class="subtitle-text" id="s5Sub">Tap to open</div>
+      <h2 class="title-banner" id="s5Title" style="font-size: 26px; margin-bottom: 2px;">Something I wanted to tell you… ♡</h2>
+      <div class="subtitle-text" id="s5Sub" style="margin-bottom: 8px; font-size: 14px;">There are a few words waiting inside</div>
 
-      <div class="envelope-box" id="envelopeInteractive">
+      <!-- Luxury Envelope matching reference photo -->
+      <div class="envelope-box luxury-envelope" id="envelopeInteractive">
         <div class="env-wrapper">
-          <div class="env-back"></div>
-          <div class="env-inner-note"></div>
-          <div class="env-front-left"></div>
-          <div class="env-front-right"></div>
-          <div class="env-front-bottom"></div>
-          <div class="env-flap"></div>
-          <div class="wax-seal">♥</div>
+          <!-- 1. Interior Backing & Pocket Lining -->
+          <div class="env-back-plate">
+            <div class="env-pocket-texture"></div>
+          </div>
+
+          <!-- 2. The Letter Note that slides out -->
+          <div class="env-inner-note" id="envInnerNote">
+            <div class="note-card-inner">
+              <div class="note-stamp">💌</div>
+              <div class="note-text-line">For Pupu ♡</div>
+              <div class="note-sub-line">Happy Birthday ✨</div>
+            </div>
+          </div>
+
+          <!-- 3. Front Ivory Body with Curved Seams & Gold Foil Piping -->
+          <div class="env-front-body">
+            <svg class="env-front-svg" viewBox="0 0 380 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Metallic Gold Foil Gradient -->
+                <linearGradient id="luxuryGoldFront" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#b8832a"/>
+                  <stop offset="16%" stop-color="#fae58e"/>
+                  <stop offset="34%" stop-color="#d4af37"/>
+                  <stop offset="52%" stop-color="#fff5ba"/>
+                  <stop offset="72%" stop-color="#c59632"/>
+                  <stop offset="90%" stop-color="#ecd174"/>
+                  <stop offset="100%" stop-color="#9a691b"/>
+                </linearGradient>
+
+                <!-- Ivory Paper Gradients with realistic lighting -->
+                <linearGradient id="ivoryLeftFoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#fefcf9"/>
+                  <stop offset="100%" stop-color="#f5ede3"/>
+                </linearGradient>
+
+                <linearGradient id="ivoryRightFoldGrad" x1="100%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#fbf8f4"/>
+                  <stop offset="100%" stop-color="#eee5d8"/>
+                </linearGradient>
+
+                <linearGradient id="ivoryBottomFoldGrad" x1="50%" y1="100%" x2="50%" y2="0%">
+                  <stop offset="0%" stop-color="#fffefb"/>
+                  <stop offset="65%" stop-color="#f9f5ed"/>
+                  <stop offset="100%" stop-color="#f0e7dc"/>
+                </linearGradient>
+
+                <filter id="foldPaperShadow" x="-10%" y="-15%" width="120%" height="135%">
+                  <feDropShadow dx="0" dy="2.5" stdDeviation="3" flood-color="rgba(110, 55, 30, 0.16)"/>
+                </filter>
+
+                <filter id="goldGleam" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="1.2" stdDeviation="1.2" flood-color="rgba(80, 35, 10, 0.3)"/>
+                </filter>
+
+                <clipPath id="envBorderClip">
+                  <rect x="0" y="0" width="380" height="240" rx="18" ry="18"/>
+                </clipPath>
+              </defs>
+
+              <g clip-path="url(#envBorderClip)">
+                <!-- Left Side Flap -->
+                <path d="M 0 0 L 0 240 L 190 116 Z" fill="url(#ivoryLeftFoldGrad)" />
+
+                <!-- Right Side Flap -->
+                <path d="M 380 0 L 380 240 L 190 116 Z" fill="url(#ivoryRightFoldGrad)" />
+
+                <!-- Bottom Fold with sweeping curved top boundary -->
+                <path d="M 0 240 
+                         L 0 215 
+                         C 10 226, 12 230, 12 230 
+                         C 10 178, 95 136, 190 115 
+                         C 285 136, 370 178, 368 230 
+                         C 368 230, 370 226, 380 215 
+                         L 380 240 Z" 
+                      fill="url(#ivoryBottomFoldGrad)" 
+                      filter="url(#foldPaperShadow)" />
+
+                <!-- Left Curved Gold Piping with S-curve flare -->
+                <path d="M 12 230 C 10 178, 95 136, 190 115" 
+                      stroke="url(#luxuryGoldFront)" 
+                      stroke-width="3.5" 
+                      stroke-linecap="round" 
+                      filter="url(#goldGleam)" />
+
+                <!-- Right Curved Gold Piping with S-curve flare -->
+                <path d="M 368 230 C 370 178, 285 136, 190 115" 
+                      stroke="url(#luxuryGoldFront)" 
+                      stroke-width="3.5" 
+                      stroke-linecap="round" 
+                      filter="url(#goldGleam)" />
+              </g>
+            </svg>
+          </div>
+
+          <!-- 4. Top Flap with 3D Rotation, Dusty Rose Satin, & Metallic Gold Trim -->
+          <div class="env-flap-container">
+            <div class="env-flap-flipper">
+              <!-- Front Face of Flap -->
+              <div class="env-flap-face env-flap-front">
+                <svg class="env-flap-svg" viewBox="0 0 380 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="luxuryGoldFlap" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#b8832a"/>
+                      <stop offset="16%" stop-color="#fae58e"/>
+                      <stop offset="34%" stop-color="#d4af37"/>
+                      <stop offset="52%" stop-color="#fff5ba"/>
+                      <stop offset="72%" stop-color="#c59632"/>
+                      <stop offset="90%" stop-color="#ecd174"/>
+                      <stop offset="100%" stop-color="#9a691b"/>
+                    </linearGradient>
+
+                    <!-- Dusty Rose / Blush Pink Satin Gradient matching reference photo -->
+                    <linearGradient id="dustyRoseFlapGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+                      <stop offset="0%" stop-color="#f6dfd8"/>
+                      <stop offset="25%" stop-color="#edd2ca"/>
+                      <stop offset="65%" stop-color="#e4bebe"/>
+                      <stop offset="100%" stop-color="#dbaeb2"/>
+                    </linearGradient>
+
+                    <filter id="flapRealisticShadow" x="-10%" y="0%" width="120%" height="150%">
+                      <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="rgba(110, 40, 60, 0.22)"/>
+                      <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="rgba(70, 20, 35, 0.15)"/>
+                    </filter>
+                  </defs>
+
+                  <!-- Flap Body Fill with Realistic Shadow -->
+                  <g filter="url(#flapRealisticShadow)">
+                    <path d="M 12 18 
+                             C 12 6, 20 0, 32 0 
+                             H 348 
+                             C 360 0, 368 6, 368 18 
+                             C 310 68, 245 112, 204 134 
+                             C 197 138, 183 138, 176 134 
+                             C 135 112, 70 68, 12 18 Z" 
+                          fill="url(#dustyRoseFlapGrad)"/>
+                  </g>
+
+                  <!-- Metallic Gold Border along V-edge and rounded apex -->
+                  <path d="M 12 16 
+                           C 70 68, 135 112, 176 134 
+                           C 183 138, 197 138, 204 134 
+                           C 245 112, 310 68, 368 16" 
+                        fill="none" 
+                        stroke="url(#luxuryGoldFlap)" 
+                        stroke-width="3.8" 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round"/>
+                </svg>
+              </div>
+
+              <!-- Back Face of Flap (visible when folded open 180deg) -->
+              <div class="env-flap-face env-flap-back">
+                <svg class="env-flap-svg" viewBox="0 0 380 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M 12 18 
+                           C 12 6, 20 0, 32 0 
+                           H 348 
+                           C 360 0, 368 6, 368 18 
+                           C 310 68, 245 112, 204 134 
+                           C 197 138, 183 138, 176 134 
+                           C 135 112, 70 68, 12 18 Z" 
+                        fill="#fbebe6"/>
+                  <path d="M 12 16 
+                           C 70 68, 135 112, 176 134 
+                           C 183 138, 197 138, 204 134 
+                           C 245 112, 310 68, 368 16" 
+                        fill="none" 
+                        stroke="url(#luxuryGoldFlap)" 
+                        stroke-width="3.8" 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <button id="btnOpenLetter" class="btn-pill">TAP TO OPEN</button>
+      <!-- TAP TO OPEN Prompt matching reference photo -->
+      <div class="envelope-tap-prompt" id="btnOpenLetter">
+        <span class="prompt-label">TAP TO OPEN</span>
+        <div class="tap-pointer-wrap">
+          <svg class="pointer-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 13V4.5C8 3.67 8.67 3 9.5 3C10.33 3 11 3.67 11 4.5V11.5" stroke="#983854" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M11 7.5C11 6.67 11.67 6 12.5 6C13.33 6 14 6.67 14 7.5V11.5" stroke="#983854" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 8.5C14 7.67 14.67 7 15.5 7C16.33 7 17 7.67 17 8.5V12" stroke="#983854" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17 10C17 9.17 17.67 8.5 18.5 8.5C19.33 8.5 20 9.17 20 10V14.5C20 18.09 17.09 21 13.5 21C11.57 21 9.83 20.16 8.62 18.82L4.5 14.24C3.88 13.55 3.96 12.5 4.67 11.91C5.38 11.33 6.43 11.44 7.02 12.16L8 13.34V4.5" stroke="#983854" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
     </section>
 
     <!-- Full Letter Popup Modal -->
     <div class="letter-modal" id="letterModal">
       <div class="letter-sheet">
+        <button class="letter-close-btn" id="btnCloseLetterModal" aria-label="Close Letter" title="Close">✕</button>
         <div class="stamp-decor">
           ♥
           <span>POST</span>
@@ -1616,6 +2250,25 @@
       ];
       let currentScreenIndex = 0;
 
+      // Direct jump via ?screen=X or #screenX (e.g. ?screen=4 to jump straight to bouquet)
+      const urlParams = new URLSearchParams(window.location.search);
+      const qScreen = urlParams.get('screen') || window.location.hash.replace('#screen', '');
+      if (qScreen) {
+        const sNum = parseInt(qScreen, 10);
+        if (!isNaN(sNum) && sNum >= 1 && sNum <= screens.length) {
+          screens.forEach(s => {
+            s.classList.remove("active");
+            s.style.transition = "none";
+          });
+          currentScreenIndex = sNum - 1;
+          screens[currentScreenIndex].classList.add("active");
+          void screens[currentScreenIndex].offsetWidth;
+          setTimeout(() => {
+            screens.forEach(s => s.style.transition = "");
+          }, 60);
+        }
+      }
+
       function goToScreen(index) {
         if (index < 0 || index >= screens.length) return;
         screens[currentScreenIndex].classList.remove("active");
@@ -1748,7 +2401,7 @@
       animateConfetti();
 
       // 5. Populate Content from Configuration
-      const cfg = window.BIRTHDAY_CONFIG || {};
+      const cfg = (typeof window.BIRTHDAY_CONFIG !== "undefined" ? window.BIRTHDAY_CONFIG : (typeof BIRTHDAY_CONFIG !== "undefined" ? BIRTHDAY_CONFIG : {})) || {};
 
       // Screen 1 Setup
       if (cfg.screen1) {
@@ -1784,6 +2437,34 @@
       const totalBalloons = 4;
       const balloonCounter = document.getElementById("balloonCounter");
 
+      // Load balloon word labels from config if available
+      if (cfg.screen2?.balloons) {
+        cfg.screen2.balloons.forEach((b, i) => {
+          const w = document.getElementById(`word${i}`);
+          if (w && b.label) w.innerText = b.label;
+        });
+      }
+
+      function spawnPopSparkles(x, y) {
+        const colors = ["#f43f5e", "#ec4899", "#8b5cf6", "#3b82f6", "#10b981", "#f59e0b", "#fbbf24"];
+        for (let i = 0; i < 24; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = Math.random() * 8 + 3;
+          confettiPieces.push({
+            x: x,
+            y: y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 2,
+            size: Math.random() * 8 + 4,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            rotation: Math.random() * 360,
+            vRot: (Math.random() - 0.5) * 15,
+            gravity: 0.3,
+            opacity: 1
+          });
+        }
+      }
+
       for (let i = 0; i < totalBalloons; i++) {
         const bItem = document.getElementById(`balloon${i}`);
         const wordEl = document.getElementById(`word${i}`);
@@ -1792,6 +2473,9 @@
           if (bItem.classList.contains("popping")) return;
           bItem.classList.add("popping");
           sound.playBalloonPop();
+
+          const rect = bItem.getBoundingClientRect();
+          spawnPopSparkles(rect.left + rect.width / 2, rect.top + rect.height * 0.35);
 
           setTimeout(() => {
             wordEl.classList.add("show");
@@ -1877,7 +2561,7 @@
         goToScreen(3); // Go to Rose Bouquet
       });
 
-      // Screen 4: Rose Bouquet Setup
+      // Screen 4: Flower Bouquet Setup
       const roseBouquet = document.getElementById("roseBouquet");
       const noteCards = [
         document.getElementById("note0"),
@@ -1887,24 +2571,89 @@
       const btnBouquetContinue = document.getElementById("btnBouquetContinue");
       let noteIndex = 0;
 
-      function revealNextNote() {
+      if (cfg.screen4) {
+        if (cfg.screen4.title) document.getElementById("s4Title").innerText = cfg.screen4.title;
+        if (cfg.screen4.tapHint) document.getElementById("s4Hint").innerText = cfg.screen4.tapHint;
+        if (cfg.screen4.buttonText) btnBouquetContinue.innerText = cfg.screen4.buttonText;
+        if (cfg.screen4.messages) {
+          cfg.screen4.messages.forEach((msg, idx) => {
+            const el = document.getElementById(`noteText${idx}`);
+            if (el) el.innerText = msg;
+          });
+        }
+      }
+
+      function spawnBouquetPetals(x, y) {
+        const petalColors = ["#f59e0b", "#fbbf24", "#fef08a", "#f43f5e", "#fda4af", "#ffd166", "#ffffff"];
+        for (let i = 0; i < 24; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = Math.random() * 6.5 + 2.5;
+          confettiPieces.push({
+            x: x,
+            y: y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 2.2,
+            size: Math.random() * 8 + 5,
+            color: petalColors[Math.floor(Math.random() * petalColors.length)],
+            rotation: Math.random() * 360,
+            vRot: (Math.random() - 0.5) * 14,
+            gravity: 0.22,
+            opacity: 1
+          });
+        }
+      }
+
+      function revealNextNote(isManual = false) {
+        if (isManual && s4Timers.length > 0) {
+          // Clear next pending timer since user advanced manually
+          const t = s4Timers.shift();
+          if (t) clearTimeout(t);
+        }
+
         if (noteIndex < noteCards.length) {
           noteCards[noteIndex].classList.add("pop-in");
-          sound.playTone(550 + noteIndex * 80, 0.2, "triangle");
+
+          // Melodic pentatonic chimes (C5 523Hz, E5 659Hz, G5 784Hz)
+          const harmonicChimes = [523.25, 659.25, 783.99];
+          sound.playTone(harmonicChimes[noteIndex] || 600, 0.28, "sine", 0.18);
+
+          // Bounce bouquet with squash & stretch
+          roseBouquet.classList.remove("bounce");
+          void roseBouquet.offsetWidth;
+          roseBouquet.classList.add("bounce");
+
+          // Spawn flutter particles from bouquet center
+          const bRect = roseBouquet.getBoundingClientRect();
+          spawnBouquetPetals(bRect.left + bRect.width / 2, bRect.top + bRect.height * 0.45);
+
           noteIndex++;
+
+          // When all 3 notes appear, activate ready pulse on Continue button
+          if (noteIndex === noteCards.length) {
+            setTimeout(() => {
+              btnBouquetContinue.classList.add("btn-bouquet-ready");
+              sound.playChime();
+            }, 750);
+          }
         }
       }
 
       roseBouquet.addEventListener("click", () => {
-        revealNextNote();
+        revealNextNote(true);
       });
 
-      // Automatically reveal first note after transition
+      // Slower, heartfelt pacing: 1.3s -> 3.7s -> 6.2s
+      let s4Timers = [];
       const s4Observer = new MutationObserver(() => {
         if (document.getElementById("screen4").classList.contains("active")) {
-          setTimeout(revealNextNote, 600);
-          setTimeout(revealNextNote, 1400);
-          setTimeout(revealNextNote, 2200);
+          s4Timers.forEach(clearTimeout);
+          s4Timers = [];
+          s4Timers.push(setTimeout(() => revealNextNote(false), 1300));
+          s4Timers.push(setTimeout(() => revealNextNote(false), 3700));
+          s4Timers.push(setTimeout(() => revealNextNote(false), 6200));
+        } else {
+          s4Timers.forEach(clearTimeout);
+          s4Timers = [];
         }
       });
       s4Observer.observe(document.getElementById("screen4"), { attributes: true, attributeFilter: ["class"] });
@@ -1917,7 +2666,20 @@
       const envelopeBox = document.getElementById("envelopeInteractive");
       const btnOpenLetter = document.getElementById("btnOpenLetter");
       const letterModal = document.getElementById("letterModal");
+      const btnCloseLetterModal = document.getElementById("btnCloseLetterModal");
       const btnLetterNext = document.getElementById("btnLetterNext");
+
+      // Inject Screen 5 Titles from Config
+      if (cfg.screen5) {
+        if (cfg.screen5.title) {
+          const t = document.getElementById("s5Title");
+          if (t) t.innerText = cfg.screen5.title;
+        }
+        if (cfg.screen5.subtitle) {
+          const s = document.getElementById("s5Sub");
+          if (s) s.innerText = cfg.screen5.subtitle;
+        }
+      }
 
       // Inject Letter Content from Config
       if (cfg.screen5?.letter) {
@@ -1935,16 +2697,43 @@
       }
 
       function openEnvelope() {
+        if (envelopeBox.classList.contains("opened")) {
+          // If envelope is already opened, directly show the letter modal
+          letterModal.classList.add("active");
+          sound.playChime();
+          return;
+        }
         envelopeBox.classList.add("opened");
-        sound.playTone(480, 0.35, "sine", 0.15);
+        sound.playTone(523.25, 0.25, "sine", 0.15); // C5
+        setTimeout(() => sound.playTone(659.25, 0.28, "sine", 0.15), 140); // E5
+        setTimeout(() => sound.playTone(783.99, 0.35, "sine", 0.18), 280); // G5
         setTimeout(() => {
           sound.playChime();
           letterModal.classList.add("active");
-        }, 800);
+        }, 900);
       }
 
       envelopeBox.addEventListener("click", openEnvelope);
       btnOpenLetter.addEventListener("click", openEnvelope);
+
+      if (urlParams.get('opened')) {
+        envelopeBox.classList.add("opened");
+      }
+      if (urlParams.get('modal')) {
+        letterModal.classList.add("active");
+      }
+
+      if (btnCloseLetterModal) {
+        btnCloseLetterModal.addEventListener("click", () => {
+          letterModal.classList.remove("active");
+        });
+      }
+
+      letterModal.addEventListener("click", (e) => {
+        if (e.target === letterModal) {
+          letterModal.classList.remove("active");
+        }
+      });
 
       btnLetterNext.addEventListener("click", () => {
         letterModal.classList.remove("active");
@@ -2008,10 +2797,14 @@
         wishCard.classList.remove("show");
 
         // Reset bouquet
+        s4Timers.forEach(clearTimeout);
+        s4Timers = [];
         noteCards.forEach(card => card.classList.remove("pop-in"));
+        btnBouquetContinue.classList.remove("btn-bouquet-ready");
 
         // Reset envelope
         envelopeBox.classList.remove("opened");
+        letterModal.classList.remove("active");
 
         // Reset gift
         giftStageWrap.style.display = "flex";
