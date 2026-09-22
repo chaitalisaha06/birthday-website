@@ -18,11 +18,12 @@ window.BIRTHDAY_CONFIG = {
     title: "Pop them, one by one… 🎈",
     balloons: [
       { color: "blue", label: "You" },
-      { color: "pink", label: "make" },
-      { color: "green", label: "my heart" },
-      { color: "purple", label: "smile ♡" }
+      { color: "pink", label: "are" },
+      { color: "green", label: "so" },
+      { color: "purple", label: "special ♡" }
     ],
-    completedNote: "See? You really do make my heart smile. ♡"
+    completedNote: "See? You really are special to me. ♡",
+    continueButton: "Make a wish 🎂✨"
   },
 
   // ─────────────────────────────────────────────
@@ -44,9 +45,9 @@ window.BIRTHDAY_CONFIG = {
     tapHint: "Tap the flowers… I left a few things unsaid. ♡",
 
     messages: [
-      "You have this beautiful way of making ordinary days feel special. ♡",
+      "You are one of the most special people in my life. And somehow, you make even my most ordinary days feel a little more beautiful. ♡",
 
-      "If I could wrap up all my favourite moments with you and gift them to you, I would. 🎀",
+      "If I could wrap up everything I love about you... your smile, your heart, your little ways, and all our memories — I’d put them all in this bouquet for you. 🎀",
 
       "On your birthday, I just want you to know… you are loved, appreciated, and very, very special to me. 🌻"
     ],

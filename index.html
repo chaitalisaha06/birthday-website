@@ -431,6 +431,55 @@
       padding: 6px 18px;
       border-radius: 999px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s ease;
+    }
+
+    .balloon-counter.completed {
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--deep-wine);
+      box-shadow: 0 4px 18px rgba(214, 51, 108, 0.22);
+      transform: scale(1.03);
+    }
+
+    .balloon-continue-wrap {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(14px) scale(0.95);
+      transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .balloon-continue-wrap.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .btn-balloon-ready {
+      animation: buttonPulseGlow 2.4s ease-in-out infinite alternate;
+      cursor: pointer;
+    }
+
+    .balloon-tap-prompt {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+      opacity: 0.9;
+      letter-spacing: 0.3px;
+      animation: promptPulse 2s ease-in-out infinite alternate;
+      cursor: pointer;
+    }
+
+    @keyframes promptPulse {
+      0% { opacity: 0.6; transform: translateY(0); }
+      100% { opacity: 1; transform: translateY(-2px); }
     }
 
     /* ========================================================
@@ -1600,6 +1649,11 @@
       </div>
 
       <div class="balloon-counter" id="balloonCounter">Pop all 4 balloons (0 / 4)</div>
+
+      <div class="balloon-continue-wrap" id="balloonContinueWrap">
+        <button id="btnBalloonContinue" class="btn-pill btn-balloon-ready">Make a wish 🎂✨</button>
+        <span class="balloon-tap-prompt">✨ Or tap anywhere to continue ✨</span>
+      </div>
     </section>
 
     <!-- ========================================================
@@ -2434,8 +2488,43 @@
 
       // Screen 2: Balloon Pop Setup
       let poppedCount = 0;
+      let balloonCompleted = false;
       const totalBalloons = 4;
       const balloonCounter = document.getElementById("balloonCounter");
+      const balloonContinueWrap = document.getElementById("balloonContinueWrap");
+      const btnBalloonContinue = document.getElementById("btnBalloonContinue");
+      const screen2El = document.getElementById("screen2");
+
+      if (cfg.screen2?.title) {
+        const s2Title = document.getElementById("s2Title");
+        if (s2Title) s2Title.innerText = cfg.screen2.title;
+      }
+      if (cfg.screen2?.continueButton && btnBalloonContinue) {
+        btnBalloonContinue.innerText = cfg.screen2.continueButton;
+      }
+
+      function proceedFromBalloons() {
+        if (!balloonCompleted) return;
+        balloonCompleted = false;
+        sound.playTone(440, 0.1, "sine", 0.08);
+        goToScreen(2); // Go to Cake & Candle
+      }
+
+      if (btnBalloonContinue) {
+        btnBalloonContinue.addEventListener("click", (e) => {
+          e.stopPropagation();
+          proceedFromBalloons();
+        });
+      }
+
+      if (screen2El) {
+        screen2El.addEventListener("click", (e) => {
+          if (!balloonCompleted) return;
+          // Ignore click if user clicked an active balloon item directly
+          if (e.target.closest(".balloon-item")) return;
+          proceedFromBalloons();
+        });
+      }
 
       // Load balloon word labels from config if available
       if (cfg.screen2?.balloons) {
@@ -2469,7 +2558,7 @@
         const bItem = document.getElementById(`balloon${i}`);
         const wordEl = document.getElementById(`word${i}`);
 
-        bItem.addEventListener("click", () => {
+        bItem.addEventListener("click", (e) => {
           if (bItem.classList.contains("popping")) return;
           bItem.classList.add("popping");
           sound.playBalloonPop();
@@ -2484,10 +2573,17 @@
 
             if (poppedCount === totalBalloons) {
               balloonCounter.innerText = cfg.screen2?.completedNote || "You are so special ✨";
+              balloonCounter.classList.add("completed");
               sound.playChime();
+              fireConfetti(35);
+
+              // Instead of auto-advancing, enable click-to-proceed and reveal continue button
               setTimeout(() => {
-                goToScreen(2); // Go to Cake & Candle
-              }, 1400);
+                balloonCompleted = true;
+                if (balloonContinueWrap) {
+                  balloonContinueWrap.classList.add("show");
+                }
+              }, 250);
             }
           }, 180);
         });
@@ -2779,6 +2875,7 @@
         // Reset state & restart
         giftTaps = 0;
         poppedCount = 0;
+        balloonCompleted = false;
         candleBlown = false;
         noteIndex = 0;
 
@@ -2790,6 +2887,10 @@
           w.classList.remove("show");
         }
         balloonCounter.innerText = "Pop all 4 balloons (0 / 4)";
+        balloonCounter.classList.remove("completed");
+        if (balloonContinueWrap) {
+          balloonContinueWrap.classList.remove("show");
+        }
 
         // Reset cake
         cakeStand.classList.remove("blown");
