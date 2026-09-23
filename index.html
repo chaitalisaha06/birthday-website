@@ -2775,6 +2775,21 @@
           const s = document.getElementById("s5Sub");
           if (s) s.innerText = cfg.screen5.subtitle;
         }
+        if (cfg.screen5.openButtonText) {
+          const promptLabel = document.querySelector("#btnOpenLetter .prompt-label");
+          if (promptLabel) promptLabel.innerText = cfg.screen5.openButtonText;
+        }
+        if (cfg.screen5.buttonText && btnLetterNext) {
+          btnLetterNext.innerText = cfg.screen5.buttonText;
+        }
+      }
+
+      // Inject recipientName on the envelope inner note card if customized
+      if (cfg.recipientName) {
+        const noteTextLine = document.querySelector(".note-text-line");
+        if (noteTextLine) {
+          noteTextLine.innerText = `For ${cfg.recipientName} ♡`;
+        }
       }
 
       // Inject Letter Content from Config
@@ -2792,9 +2807,15 @@
         document.getElementById("letterSignature").innerText = cfg.screen5.letter.signature || "Your Special Someone 🌸";
       }
 
+      let envelopeOpeningTimer = null;
+
       function openEnvelope() {
         if (envelopeBox.classList.contains("opened")) {
-          // If envelope is already opened, directly show the letter modal
+          // If envelope is already opened or tapped again during stay, directly show the letter modal
+          if (envelopeOpeningTimer) {
+            clearTimeout(envelopeOpeningTimer);
+            envelopeOpeningTimer = null;
+          }
           letterModal.classList.add("active");
           sound.playChime();
           return;
@@ -2803,10 +2824,13 @@
         sound.playTone(523.25, 0.25, "sine", 0.15); // C5
         setTimeout(() => sound.playTone(659.25, 0.28, "sine", 0.15), 140); // E5
         setTimeout(() => sound.playTone(783.99, 0.35, "sine", 0.18), 280); // G5
-        setTimeout(() => {
+        
+        // Keep a 2.5-second (2-3s) stay on the opened envelope & note card before opening the full letter
+        envelopeOpeningTimer = setTimeout(() => {
           sound.playChime();
           letterModal.classList.add("active");
-        }, 900);
+          envelopeOpeningTimer = null;
+        }, 2500);
       }
 
       envelopeBox.addEventListener("click", openEnvelope);
@@ -2846,6 +2870,32 @@
       const btnReplay = document.getElementById("btnReplay");
       let giftTaps = 0;
       const targetTaps = cfg.screen6?.tapsRequired || 3;
+
+      // Inject Screen 6 Config
+      if (cfg.screen6) {
+        if (cfg.screen6.title) {
+          const t = document.getElementById("s6Title");
+          if (t) t.innerText = cfg.screen6.title;
+        }
+        if (cfg.screen6.subtitle) {
+          const s = document.getElementById("s6Sub");
+          if (s) s.innerText = cfg.screen6.subtitle;
+        }
+        if (cfg.screen6.finaleTitle) {
+          const fh = document.getElementById("finaleHeading");
+          if (fh) fh.innerText = cfg.screen6.finaleTitle;
+        }
+        if (cfg.screen6.finaleSub) {
+          const fs = document.getElementById("finaleSubText");
+          if (fs) {
+            fs.innerText = cfg.screen6.finaleSub;
+            fs.style.whiteSpace = "pre-line";
+          }
+        }
+        if (cfg.screen6.replayButtonText && btnReplay) {
+          btnReplay.innerText = cfg.screen6.replayButtonText;
+        }
+      }
 
       giftBox.addEventListener("click", () => {
         if (giftTaps >= targetTaps) return;
@@ -2904,6 +2954,10 @@
         btnBouquetContinue.classList.remove("btn-bouquet-ready");
 
         // Reset envelope
+        if (envelopeOpeningTimer) {
+          clearTimeout(envelopeOpeningTimer);
+          envelopeOpeningTimer = null;
+        }
         envelopeBox.classList.remove("opened");
         letterModal.classList.remove("active");
 
