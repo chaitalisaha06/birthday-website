@@ -1,9 +1,7 @@
 window.BIRTHDAY_CONFIG = {
   recipientName: "Pupu",
 
-  // ─────────────────────────────────────────────
   // SCREEN 0 — PRELUDE & GOOD NOTE
-  // ─────────────────────────────────────────────
   screen0: {
     badge: "A Special Birthday Melody ✨",
     heading: "Before we begin… ♡",
@@ -11,9 +9,7 @@ window.BIRTHDAY_CONFIG = {
     tapPrompt: "Tap here to start with a good note"
   },
 
-  // ─────────────────────────────────────────────
   // SCREEN 1 — THE BEGINNING
-  // ─────────────────────────────────────────────
   screen1: {
     heading: "Hey Birthday Boy, Pupu 🎂♡",
     question: "Ready for a tiny little surprise made just for you?",
@@ -21,9 +17,7 @@ window.BIRTHDAY_CONFIG = {
     noButtonText: "Let me think 🙈"
   },
 
-  // ─────────────────────────────────────────────
   // SCREEN 2 — LITTLE LOVE NOTES
-  // ─────────────────────────────────────────────
   screen2: {
     title: "Pop them, one by one… 🎈",
     balloons: [
@@ -36,9 +30,7 @@ window.BIRTHDAY_CONFIG = {
     continueButton: "Make a wish 🎂✨"
   },
 
-  // ─────────────────────────────────────────────
   // SCREEN 3 — MAKE A WISH
-  // ─────────────────────────────────────────────
   screen3: {
     title: "Make a wish, Birthday Boy 🎂✨",
     micPrompt: "🎤 Blow out your candle",
@@ -47,9 +39,7 @@ window.BIRTHDAY_CONFIG = {
     continueButton: "There’s more for you →"
   },
 
-  // ─────────────────────────────────────────────
   // SCREEN 4 — FLOWERS
-  // ─────────────────────────────────────────────
   screen4: {
     title: "A little bouquet for you 🌻",
     tapHint: "Tap the flowers… I left a few things unsaid. ♡",
@@ -65,9 +55,7 @@ window.BIRTHDAY_CONFIG = {
     buttonText: "One more thing… →"
   },
 
-  // ─────────────────────────────────────────────
   // SCREEN 5 — LOVE LETTER
-  // ─────────────────────────────────────────────
   screen5: {
     title: "Something I wanted to tell you… ♡",
     subtitle: "There are a few words waiting inside.",
@@ -99,9 +87,7 @@ window.BIRTHDAY_CONFIG = {
     buttonText: "I saved one last surprise… →"
   },
 
-  // ─────────────────────────────────────────────
   // SCREEN 6 — FINAL SURPRISE
-  // ─────────────────────────────────────────────
   screen6: {
     title: "Okay… one last thing. 🎁",
     subtitle: "There might be something waiting for you…",
@@ -116,9 +102,7 @@ window.BIRTHDAY_CONFIG = {
     replayButtonText: "🔁 Relive the little surprise"
   },
 
-  // ─────────────────────────────────────────────
   // MUSIC
-  // ─────────────────────────────────────────────
   music: {
     title: "Birthday Song",
     src: "assets/bg-music.mp3",
