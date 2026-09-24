@@ -2,6 +2,16 @@ window.BIRTHDAY_CONFIG = {
   recipientName: "Pupu",
 
   // ─────────────────────────────────────────────
+  // SCREEN 0 — PRELUDE & GOOD NOTE
+  // ─────────────────────────────────────────────
+  screen0: {
+    badge: "A Special Birthday Melody ✨",
+    heading: "Before we begin… ♡",
+    subtitle: "Every sweet memory deserves a lovely melody ✨",
+    tapPrompt: "Tap here to start with a good note"
+  },
+
+  // ─────────────────────────────────────────────
   // SCREEN 1 — THE BEGINNING
   // ─────────────────────────────────────────────
   screen1: {
@@ -110,7 +120,10 @@ window.BIRTHDAY_CONFIG = {
   // MUSIC
   // ─────────────────────────────────────────────
   music: {
-    autoplayPrompt: "A little music for you 🎵",
-    enabledByDefault: true
+    title: "Birthday Song",
+    src: "assets/bg-music.mp3",
+    fallbackSrc: "2cd6-d5b1-417d-829d-98da6b8c993a (mp3cut.net).mp3",
+    autoplayOnStart: true,
+    volume: 0.75
   }
 };

@@ -76,41 +76,88 @@
       position: fixed;
       top: 18px;
       right: 18px;
-      z-index: 50;
+      z-index: 60;
       display: flex;
+      align-items: center;
       gap: 10px;
     }
 
     .control-btn {
-      width: 44px;
       height: 44px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.88);
-      border: 1px solid rgba(220, 140, 165, 0.3);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 14px rgba(160, 40, 75, 0.12);
+      min-width: 44px;
+      padding: 0 12px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1.5px solid rgba(220, 140, 165, 0.4);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 6px 18px rgba(160, 40, 75, 0.14);
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 6px;
       cursor: pointer;
-      font-size: 19px;
+      font-size: 18px;
       color: var(--deep-wine);
-      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
     .control-btn:hover {
-      transform: scale(1.08);
-      box-shadow: 0 6px 18px rgba(160, 40, 75, 0.2);
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 8px 22px rgba(160, 40, 75, 0.22);
+      border-color: var(--primary-rose);
     }
 
     .control-btn.playing {
-      animation: spinRecord 6s linear infinite;
+      background: rgba(255, 245, 248, 0.95);
+      border-color: rgba(214, 51, 108, 0.5);
+      box-shadow: 0 6px 20px rgba(214, 51, 108, 0.25), 0 0 0 3px rgba(244, 114, 182, 0.2);
     }
 
-    @keyframes spinRecord {
+    .control-btn .music-icon-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+
+    .control-btn.playing .music-icon-wrap {
+      animation: gentleVinylSpin 4s linear infinite;
+    }
+
+    @keyframes gentleVinylSpin {
       100% {
         transform: rotate(360deg);
       }
+    }
+
+    /* Soundwave Equalizer Bars */
+    .music-wave-bars {
+      display: none;
+      align-items: flex-end;
+      gap: 2.5px;
+      height: 14px;
+      padding-bottom: 2px;
+    }
+
+    .control-btn.playing .music-wave-bars {
+      display: flex;
+    }
+
+    .music-wave-bars .bar {
+      width: 2.5px;
+      background: var(--primary-rose);
+      border-radius: 9999px;
+      animation: eqBar 1.2s ease-in-out infinite alternate;
+    }
+
+    .music-wave-bars .bar-1 { height: 6px; animation-delay: 0.1s; }
+    .music-wave-bars .bar-2 { height: 13px; animation-delay: 0.35s; }
+    .music-wave-bars .bar-3 { height: 8px; animation-delay: 0.2s; }
+
+    @keyframes eqBar {
+      0% { height: 3px; }
+      100% { height: 13px; }
     }
 
     /* Screen Management */
@@ -231,6 +278,297 @@
       100% {
         left: 200%;
       }
+    }
+
+    /* ========================================================
+       SCREEN 0: PRELUDE & GOOD NOTE (LUXURY MUSIC BOX CARD)
+       ======================================================== */
+    .prelude-card {
+      width: min(92vw, 440px);
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 32px;
+      padding: 34px 24px 30px;
+      box-shadow: 0 24px 50px -10px rgba(175, 40, 80, 0.18),
+                  0 0 0 1.5px rgba(255, 255, 255, 0.95) inset,
+                  0 0 35px -5px rgba(244, 114, 182, 0.22);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: cardEntrance 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    @keyframes cardEntrance {
+      0% {
+        opacity: 0;
+        transform: translateY(24px) scale(0.96);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .prelude-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #f472b6, #d6336c, #fbbf24, #d6336c, #f472b6);
+      background-size: 200% 100%;
+      animation: ribbonFlow 4s linear infinite;
+    }
+
+    @keyframes ribbonFlow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .prelude-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, rgba(254, 242, 242, 0.92), rgba(255, 228, 235, 0.92));
+      border: 1px solid rgba(244, 114, 182, 0.35);
+      color: var(--deep-wine);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(214, 51, 108, 0.08);
+    }
+
+    .badge-sparkle {
+      animation: spinTwinkle 3s ease-in-out infinite;
+    }
+
+    @keyframes spinTwinkle {
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+      50% { transform: scale(1.25) rotate(15deg); opacity: 1; }
+    }
+
+    /* Vinyl Record Showcase */
+    .music-stage-wrapper {
+      position: relative;
+      width: 154px;
+      height: 154px;
+      margin: 4px auto 22px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .vinyl-aura {
+      position: absolute;
+      inset: -14px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(244, 114, 182, 0.45) 0%, rgba(214, 51, 108, 0.14) 50%, transparent 72%);
+      animation: auraPulse 3s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes auraPulse {
+      0% { transform: scale(0.92); opacity: 0.6; }
+      100% { transform: scale(1.08); opacity: 1; }
+    }
+
+    .vinyl-disc {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #2d262a 0%, #171215 100%);
+      box-shadow: 0 12px 30px rgba(45, 20, 30, 0.35),
+                  0 0 0 2px rgba(255, 255, 255, 0.2);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: spinVinyl 8s linear infinite;
+      transition: transform 0.3s ease;
+    }
+
+    .music-stage-wrapper:hover .vinyl-disc {
+      animation-duration: 4s;
+      transform: scale(1.04);
+    }
+
+    @keyframes spinVinyl {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .vinyl-groove {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      pointer-events: none;
+    }
+
+    .groove-1 { width: 122px; height: 122px; }
+    .groove-2 { width: 104px; height: 104px; }
+    .groove-3 { width: 86px; height: 86px; }
+
+    .vinyl-center-label {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fbcfe8 0%, #f472b6 50%, #d6336c 100%);
+      border: 2px solid #fff5f8;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .vinyl-spindle-hole {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #171215;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      margin-bottom: 2px;
+    }
+
+    .vinyl-label-icon {
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .vinyl-label-text {
+      font-size: 7.5px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: #ffffff;
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    /* Orbiting Musical Items */
+    .orbit-item {
+      position: absolute;
+      font-weight: 700;
+      pointer-events: none;
+      animation: floatOrbit 4s ease-in-out infinite;
+    }
+
+    .note-1 { top: -6px; left: 16px; font-size: 22px; color: #f472b6; animation-delay: 0s; }
+    .note-2 { top: 12px; right: -4px; font-size: 20px; color: #d6336c; animation-delay: 0.9s; }
+    .note-3 { bottom: 8px; right: 10px; font-size: 22px; color: #db2777; animation-delay: 1.8s; }
+    .note-4 { bottom: 0px; left: 12px; font-size: 18px; color: #e879f9; animation-delay: 2.7s; }
+    .spark-1 { top: 48px; left: -14px; font-size: 17px; color: #facc15; animation-delay: 1.2s; }
+    .spark-2 { top: 52px; right: -16px; font-size: 16px; color: #f43f5e; animation-delay: 2.2s; }
+
+    @keyframes floatOrbit {
+      0%, 100% {
+        transform: translateY(0) scale(1) rotate(0deg);
+        opacity: 0.85;
+      }
+      50% {
+        transform: translateY(-8px) scale(1.15) rotate(10deg);
+        opacity: 1;
+      }
+    }
+
+    .s0-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 6.5vw, 38px);
+      color: var(--deep-wine);
+      margin-bottom: 8px;
+    }
+
+    .s0-subtitle {
+      font-size: clamp(14px, 3.8vw, 16px);
+      color: var(--text-muted);
+      margin-bottom: 38px;
+      line-height: 1.45;
+      max-width: 340px;
+    }
+
+    /* Start Button with Radiant Pulse */
+    .btn-start-note {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 360px;
+      padding: 16px 28px;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #f472b6 0%, #d6336c 48%, #9e2048 100%);
+      color: #ffffff;
+      box-shadow: 0 12px 30px -4px rgba(214, 51, 108, 0.42),
+                  0 0 0 1.5px rgba(255, 255, 255, 0.4) inset,
+                  0 0 20px rgba(244, 114, 182, 0.35);
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      overflow: hidden;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+
+    .btn-start-note:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 18px 36px -4px rgba(214, 51, 108, 0.52),
+                  0 0 28px rgba(244, 114, 182, 0.5);
+    }
+
+    .btn-start-note:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    .btn-note-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: var(--font-body);
+      font-size: clamp(15px, 3.8vw, 17px);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-note-symbol {
+      font-size: 20px;
+      display: inline-block;
+      animation: noteBounce 1.5s ease-in-out infinite;
+    }
+
+    @keyframes noteBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px) rotate(8deg); }
+    }
+
+    .btn-note-sparkle {
+      font-size: 16px;
+      color: #fef08a;
+    }
+
+    .btn-start-note::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 70%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transform: skewX(-22deg);
+      animation: buttonShine 3.5s infinite;
     }
 
     /* ========================================================
@@ -1573,6 +1911,12 @@
 
 <body>
 
+  <!-- Background Music Audio Element -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="assets/bg-music.mp3" type="audio/mpeg">
+    <source src="2cd6-d5b1-417d-829d-98da6b8c993a (mp3cut.net).mp3" type="audio/mpeg">
+  </audio>
+
   <!-- Background Ambient Glow & Hearts Canvas -->
   <div class="ambient-glow"></div>
   <canvas id="ambientCanvas" class="ambient-canvas"></canvas>
@@ -1581,16 +1925,67 @@
   <!-- Top Right Sound & Music Toggle -->
   <div class="top-controls">
     <button id="musicToggle" class="control-btn" title="Toggle Music" aria-label="Toggle background music">
-      🎵
+      <span class="music-icon-wrap">🎵</span>
+      <span class="music-wave-bars" aria-hidden="true">
+        <span class="bar bar-1"></span>
+        <span class="bar bar-2"></span>
+        <span class="bar bar-3"></span>
+      </span>
     </button>
   </div>
 
   <div class="app-container">
 
     <!-- ========================================================
+         SCREEN 0: PRELUDE — START WITH A GOOD NOTE
+         ======================================================== -->
+    <section id="screen0" class="screen active">
+      <div class="prelude-card">
+        <div class="prelude-badge">
+          <span class="badge-sparkle">✨</span>
+          <span id="s0Badge">A Special Birthday Melody</span>
+          <span class="badge-sparkle">✨</span>
+        </div>
+
+        <div class="music-stage-wrapper" id="musicStagePrelude" title="Tap to start with a good note!">
+          <div class="vinyl-aura"></div>
+          
+          <div class="vinyl-disc">
+            <div class="vinyl-groove groove-1"></div>
+            <div class="vinyl-groove groove-2"></div>
+            <div class="vinyl-groove groove-3"></div>
+            <div class="vinyl-center-label">
+              <div class="vinyl-spindle-hole"></div>
+              <span class="vinyl-label-icon">🎵</span>
+              <span class="vinyl-label-text">FOR PUPU</span>
+            </div>
+          </div>
+
+          <span class="orbit-item note-1">♪</span>
+          <span class="orbit-item note-2">♫</span>
+          <span class="orbit-item note-3">♬</span>
+          <span class="orbit-item note-4">♩</span>
+          <span class="orbit-item spark-1">✦</span>
+          <span class="orbit-item spark-2">💖</span>
+        </div>
+
+        <h1 class="title-banner s0-title" id="s0Heading">Before we begin… ♡</h1>
+        <p class="subtitle-text s0-subtitle" id="s0Sub">Every beautiful memory starts with a good note ✨</p>
+
+        <button id="btnStartGoodNote" class="btn-start-note">
+          <span class="btn-note-content">
+            <span class="btn-note-symbol">🎵</span>
+            <span class="btn-note-text" id="s0TapPrompt">Tap here to start with a good note</span>
+            <span class="btn-note-sparkle">✨</span>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================================================
          SCREEN 1: WELCOME & BEARS WITH CAKE
          ======================================================== -->
-    <section id="screen1" class="screen active">
+    <section id="screen1" class="screen">
       <h1 class="title-banner" id="s1Heading">Happy Birthday, Pupu 🎀💖</h1>
 
       <div class="bears-container">
@@ -2136,158 +2531,86 @@
     (function () {
       "use strict";
 
-      // 1. Audio Engine (Pure Web Audio API Synthesizer - 100% Reliable, Zero Dependencies)
+      // 1. Audio Engine (Dedicated Background Music Controller)
       class SoundEngine {
         constructor() {
-          this.ctx = null;
           this.isMuted = false;
           this.isPlayingMusic = false;
-          this.musicTimer = null;
+          this.bgAudio = document.getElementById("bgMusic");
         }
 
-        init() {
-          if (!this.ctx) {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            this.ctx = new AudioContext();
-          }
-          if (this.ctx.state === "suspended") {
-            this.ctx.resume();
-          }
-        }
+        init() {}
 
-        playTone(freq, duration = 0.15, type = "sine", gainVal = 0.2) {
-          if (this.isMuted) return;
-          try {
-            this.init();
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
-            osc.type = type;
-            osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-            gain.gain.setValueAtTime(gainVal, this.ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration);
-            osc.connect(gain);
-            gain.connect(this.ctx.destination);
-            osc.start();
-            osc.stop(this.ctx.currentTime + duration);
-          } catch (e) {
-            console.warn("Audio play error", e);
-          }
-        }
+        // Effect sound methods silenced as requested
+        playTone() {}
+        playBalloonPop() {}
+        playChime() {}
+        playWhoosh() {}
+        playCelebrationFanfare() {}
+        startMusicBoxLoop() {}
 
-        playBalloonPop() {
-          if (this.isMuted) return;
-          try {
-            this.init();
-            // Pop noise buffer
-            const bufferSize = this.ctx.sampleRate * 0.08;
-            const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
-            const data = buffer.getChannelData(0);
-            for (let i = 0; i < bufferSize; i++) {
-              data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.15));
+        startBackgroundMusic() {
+          if (!this.bgAudio) {
+            this.bgAudio = document.getElementById("bgMusic");
+          }
+          if (this.bgAudio) {
+            this.bgAudio.loop = true;
+            const playPromise = this.bgAudio.play();
+            if (playPromise !== undefined) {
+              playPromise.then(() => {
+                this.isPlayingMusic = true;
+                this.updateMusicToggleUI(true);
+                // Warm, cinematic volume fade in
+                let vol = 0;
+                this.bgAudio.volume = 0;
+                const targetVol = (window.BIRTHDAY_CONFIG?.music?.volume) || 0.75;
+                const fade = setInterval(() => {
+                  if (!this.bgAudio || !this.isPlayingMusic) {
+                    clearInterval(fade);
+                    return;
+                  }
+                  vol = Math.min(targetVol, vol + 0.06);
+                  this.bgAudio.volume = vol;
+                  if (vol >= targetVol) clearInterval(fade);
+                }, 75);
+              }).catch(e => {
+                console.warn("Audio autoplay blocked or failed:", e);
+              });
             }
-            const noise = this.ctx.createBufferSource();
-            noise.buffer = buffer;
-            const filter = this.ctx.createBiquadFilter();
-            filter.type = "bandpass";
-            filter.frequency.value = 850;
-            filter.Q.value = 3;
-
-            const gain = this.ctx.createGain();
-            gain.gain.setValueAtTime(0.35, this.ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
-
-            noise.connect(filter);
-            filter.connect(gain);
-            gain.connect(this.ctx.destination);
-            noise.start();
-
-            // High pop chirp
-            this.playTone(520, 0.09, "sine", 0.18);
-          } catch (e) { }
+          }
         }
 
-        playChime() {
-          const notes = [523.25, 659.25, 783.99, 1046.5];
-          notes.forEach((note, idx) => {
-            setTimeout(() => this.playTone(note, 0.45, "triangle", 0.15), idx * 90);
-          });
+        pauseBackgroundMusic() {
+          if (this.bgAudio) {
+            this.bgAudio.pause();
+          }
+          this.isPlayingMusic = false;
+          this.updateMusicToggleUI(false);
         }
 
-        playWhoosh() {
-          if (this.isMuted) return;
-          try {
-            this.init();
-            const bufferSize = this.ctx.sampleRate * 0.4;
-            const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
-            const data = buffer.getChannelData(0);
-            for (let i = 0; i < bufferSize; i++) {
-              data[i] = Math.random() * 2 - 1;
-            }
-            const noise = this.ctx.createBufferSource();
-            noise.buffer = buffer;
-
-            const filter = this.ctx.createBiquadFilter();
-            filter.type = "lowpass";
-            filter.frequency.setValueAtTime(800, this.ctx.currentTime);
-            filter.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.4);
-
-            const gain = this.ctx.createGain();
-            gain.gain.setValueAtTime(0.25, this.ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.4);
-
-            noise.connect(filter);
-            filter.connect(gain);
-            gain.connect(this.ctx.destination);
-            noise.start();
-          } catch (e) { }
-        }
-
-        playCelebrationFanfare() {
-          const melody = [
-            { f: 523.25, d: 0.15 },
-            { f: 523.25, d: 0.15 },
-            { f: 587.33, d: 0.28 },
-            { f: 523.25, d: 0.28 },
-            { f: 698.46, d: 0.35 },
-            { f: 659.25, d: 0.6 }
-          ];
-          let time = 0;
-          melody.forEach(item => {
-            setTimeout(() => this.playTone(item.f, item.d, "triangle", 0.22), time * 1000);
-            time += item.d + 0.05;
-          });
-        }
-
-        toggleBackgroundMusic(btnElement) {
-          this.init();
+        toggleBackgroundMusic() {
           if (this.isPlayingMusic) {
-            this.isPlayingMusic = false;
-            clearInterval(this.musicTimer);
-            btnElement.classList.remove("playing");
-            btnElement.innerHTML = "🔇";
+            this.pauseBackgroundMusic();
           } else {
-            this.isPlayingMusic = true;
-            btnElement.classList.add("playing");
-            btnElement.innerHTML = "🎵";
-            this.startMusicBoxLoop();
+            this.startBackgroundMusic();
           }
         }
 
-        startMusicBoxLoop() {
-          // Romantic gentle music box tune (Happy Birthday / Love theme)
-          const notes = [
-            392, 392, 440, 392, 523, 493.88,
-            392, 392, 440, 392, 587.33, 523,
-            392, 392, 784, 659.25, 523, 493.88, 440,
-            698.46, 698.46, 659.25, 523, 587.33, 523
-          ];
-          let index = 0;
-          this.musicTimer = setInterval(() => {
-            if (!this.isPlayingMusic) return;
-            const f = notes[index % notes.length];
-            this.playTone(f, 0.38, "sine", 0.08);
-            index++;
-          }, 460);
+        updateMusicToggleUI(isPlaying) {
+          const btn = document.getElementById("musicToggle");
+          if (!btn) return;
+          const icon = btn.querySelector(".music-icon-wrap");
+          if (isPlaying) {
+            btn.classList.add("playing");
+            btn.setAttribute("title", "Pause music 🎵");
+            btn.setAttribute("aria-label", "Pause music");
+            if (icon) icon.innerText = "🎵";
+          } else {
+            btn.classList.remove("playing");
+            btn.setAttribute("title", "Play music 🔇");
+            btn.setAttribute("aria-label", "Play music");
+            if (icon) icon.innerText = "🔇";
+          }
         }
       }
 
@@ -2295,6 +2618,7 @@
 
       // 2. Screen Navigation Controller
       const screens = [
+        document.getElementById("screen0"),
         document.getElementById("screen1"),
         document.getElementById("screen2"),
         document.getElementById("screen3"),
@@ -2308,35 +2632,48 @@
       const urlParams = new URLSearchParams(window.location.search);
       const qScreen = urlParams.get('screen') || window.location.hash.replace('#screen', '');
       if (qScreen) {
-        const sNum = parseInt(qScreen, 10);
-        if (!isNaN(sNum) && sNum >= 1 && sNum <= screens.length) {
+        let sNum = parseInt(qScreen, 10);
+        if (!isNaN(sNum) && sNum >= 0 && sNum < screens.length) {
           screens.forEach(s => {
-            s.classList.remove("active");
-            s.style.transition = "none";
+            if (s) {
+              s.classList.remove("active");
+              s.style.transition = "none";
+            }
           });
-          currentScreenIndex = sNum - 1;
-          screens[currentScreenIndex].classList.add("active");
-          void screens[currentScreenIndex].offsetWidth;
+          currentScreenIndex = sNum;
+          if (screens[currentScreenIndex]) {
+            screens[currentScreenIndex].classList.add("active");
+            void screens[currentScreenIndex].offsetWidth;
+          }
           setTimeout(() => {
-            screens.forEach(s => s.style.transition = "");
+            screens.forEach(s => { if (s) s.style.transition = ""; });
           }, 60);
         }
       }
 
-      function goToScreen(index) {
-        if (index < 0 || index >= screens.length) return;
+      function goToScreen(target) {
+        let index = -1;
+        if (typeof target === "number") {
+          index = target;
+        } else if (typeof target === "string") {
+          index = screens.findIndex(s => s && s.id === target);
+        } else if (target && target.nodeType) {
+          index = screens.indexOf(target);
+        }
+        if (index < 0 || index >= screens.length || index === currentScreenIndex) return;
+
         screens[currentScreenIndex].classList.remove("active");
         screens[currentScreenIndex].classList.add("exit-left");
 
+        const prevIndex = currentScreenIndex;
         setTimeout(() => {
-          screens[currentScreenIndex].classList.remove("exit-left");
+          screens[prevIndex].classList.remove("exit-left");
           currentScreenIndex = index;
           screens[currentScreenIndex].classList.add("active");
-          sound.playTone(440, 0.1, "sine", 0.08);
         }, 300);
       }
 
-      // 3. Ambient Floating Hearts & Confetti Canvas
+      // 3. Ambient Floating Hearts, Musical Notes & Sparkles Canvas
       const ambientCanvas = document.getElementById("ambientCanvas");
       const aCtx = ambientCanvas.getContext("2d");
       let hearts = [];
@@ -2348,7 +2685,7 @@
       window.addEventListener("resize", resizeAmbient);
       resizeAmbient();
 
-      class FloatingHeart {
+      class FloatingParticle {
         constructor() {
           this.reset();
         }
@@ -2356,10 +2693,13 @@
           this.x = Math.random() * ambientCanvas.width;
           this.y = ambientCanvas.height + 20;
           this.size = Math.random() * 14 + 10;
-          this.speedY = Math.random() * 0.9 + 0.5;
+          this.speedY = Math.random() * 0.9 + 0.45;
           this.speedX = Math.sin(Math.random() * 6) * 0.5;
-          this.opacity = Math.random() * 0.4 + 0.2;
-          this.color = ["#f472b6", "#fb7185", "#fda4af", "#e879f9"][Math.floor(Math.random() * 4)];
+          this.opacity = Math.random() * 0.45 + 0.2;
+          this.type = Math.random() > 0.45 ? "heart" : (Math.random() > 0.4 ? "note" : "sparkle");
+          const noteGlyphs = ["♪", "♫", "♩", "♬"];
+          this.glyph = noteGlyphs[Math.floor(Math.random() * noteGlyphs.length)];
+          this.color = ["#f472b6", "#fb7185", "#fda4af", "#e879f9", "#d946ef", "#fbbf24"][Math.floor(Math.random() * 6)];
         }
         update() {
           this.y -= this.speedY;
@@ -2371,20 +2711,33 @@
           aCtx.globalAlpha = this.opacity;
           aCtx.fillStyle = this.color;
           aCtx.translate(this.x, this.y);
-          aCtx.beginPath();
-          const topCurveHeight = this.size * 0.3;
-          aCtx.moveTo(0, topCurveHeight);
-          aCtx.bezierCurveTo(0, 0, -this.size / 2, 0, -this.size / 2, topCurveHeight);
-          aCtx.bezierCurveTo(-this.size / 2, (this.size + topCurveHeight) / 2, 0, (this.size + topCurveHeight) / 2, 0, this.size);
-          aCtx.bezierCurveTo(0, (this.size + topCurveHeight) / 2, this.size / 2, (this.size + topCurveHeight) / 2, this.size / 2, topCurveHeight);
-          aCtx.bezierCurveTo(this.size / 2, 0, 0, 0, 0, topCurveHeight);
-          aCtx.fill();
+          if (this.type === "heart") {
+            aCtx.beginPath();
+            const topCurveHeight = this.size * 0.3;
+            aCtx.moveTo(0, topCurveHeight);
+            aCtx.bezierCurveTo(0, 0, -this.size / 2, 0, -this.size / 2, topCurveHeight);
+            aCtx.bezierCurveTo(-this.size / 2, (this.size + topCurveHeight) / 2, 0, (this.size + topCurveHeight) / 2, 0, this.size);
+            aCtx.bezierCurveTo(0, (this.size + topCurveHeight) / 2, this.size / 2, (this.size + topCurveHeight) / 2, this.size / 2, topCurveHeight);
+            aCtx.bezierCurveTo(this.size / 2, 0, 0, 0, 0, topCurveHeight);
+            aCtx.fill();
+          } else if (this.type === "note") {
+            aCtx.font = `bold ${Math.round(this.size * 1.2)}px sans-serif`;
+            aCtx.textAlign = "center";
+            aCtx.textBaseline = "middle";
+            aCtx.fillText(this.glyph, 0, 0);
+          } else {
+            aCtx.font = `${Math.round(this.size)}px sans-serif`;
+            aCtx.textAlign = "center";
+            aCtx.textBaseline = "middle";
+            aCtx.fillStyle = "#fbbf24";
+            aCtx.fillText("✦", 0, 0);
+          }
           aCtx.restore();
         }
       }
 
-      for (let i = 0; i < 22; i++) {
-        hearts.push(new FloatingHeart());
+      for (let i = 0; i < 24; i++) {
+        hearts.push(new FloatingParticle());
       }
 
       function animateAmbient() {
@@ -2409,21 +2762,45 @@
       window.addEventListener("resize", resizeConfetti);
       resizeConfetti();
 
+      function spawnNoteSparkles(x, y) {
+        const colors = ["#f43f5e", "#ec4899", "#8b5cf6", "#3b82f6", "#f59e0b", "#fbbf24"];
+        const symbols = ["♪", "♫", "♩", "♬", "💖", "✨", "✦"];
+        for (let i = 0; i < 22; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = Math.random() * 8 + 3;
+          confettiPieces.push({
+            x: x,
+            y: y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 2.5,
+            size: Math.random() * 10 + 13,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            rotation: (Math.random() - 0.5) * 40,
+            vRot: (Math.random() - 0.5) * 8,
+            gravity: 0.22,
+            opacity: 1,
+            symbol: symbols[Math.floor(Math.random() * symbols.length)]
+          });
+        }
+      }
+
       function fireConfetti(count = 90) {
-        sound.playCelebrationFanfare();
         const colors = ["#f43f5e", "#ec4899", "#8b5cf6", "#3b82f6", "#10b981", "#f59e0b", "#fbbf24"];
+        const symbols = ["♪", "♫", "♩", "💖", "✨", "✦"];
         for (let i = 0; i < count; i++) {
+          const isSymbol = Math.random() < 0.3;
           confettiPieces.push({
             x: confettiCanvas.width / 2,
             y: confettiCanvas.height / 2 + 50,
             vx: (Math.random() - 0.5) * 18,
             vy: (Math.random() - 0.85) * 22,
-            size: Math.random() * 9 + 6,
+            size: isSymbol ? Math.random() * 10 + 14 : Math.random() * 9 + 6,
             color: colors[Math.floor(Math.random() * colors.length)],
             rotation: Math.random() * 360,
             vRot: (Math.random() - 0.5) * 12,
-            gravity: 0.38,
-            opacity: 1
+            gravity: 0.36,
+            opacity: 1,
+            symbol: isSymbol ? symbols[Math.floor(Math.random() * symbols.length)] : null
           });
         }
       }
@@ -2443,7 +2820,14 @@
           cCtx.fillStyle = p.color;
           cCtx.translate(p.x, p.y);
           cCtx.rotate((p.rotation * Math.PI) / 180);
-          cCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+          if (p.symbol) {
+            cCtx.font = `bold ${Math.round(p.size)}px "Plus Jakarta Sans", sans-serif`;
+            cCtx.textAlign = "center";
+            cCtx.textBaseline = "middle";
+            cCtx.fillText(p.symbol, 0, 0);
+          } else {
+            cCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+          }
           cCtx.restore();
 
           if (p.opacity <= 0 || p.y > confettiCanvas.height + 50) {
@@ -2456,6 +2840,47 @@
 
       // 5. Populate Content from Configuration
       const cfg = (typeof window.BIRTHDAY_CONFIG !== "undefined" ? window.BIRTHDAY_CONFIG : (typeof BIRTHDAY_CONFIG !== "undefined" ? BIRTHDAY_CONFIG : {})) || {};
+
+      // Screen 0 Setup
+      if (cfg.screen0) {
+        if (cfg.screen0.badge) {
+          const b = document.getElementById("s0Badge");
+          if (b) b.innerText = cfg.screen0.badge;
+        }
+        if (cfg.screen0.heading) {
+          const h = document.getElementById("s0Heading");
+          if (h) h.innerText = cfg.screen0.heading;
+        }
+        if (cfg.screen0.subtitle) {
+          const s = document.getElementById("s0Sub");
+          if (s) s.innerText = cfg.screen0.subtitle;
+        }
+        if (cfg.screen0.tapPrompt) {
+          const p = document.getElementById("s0TapPrompt");
+          if (p) p.innerText = cfg.screen0.tapPrompt;
+        }
+      }
+
+      const btnStartGoodNote = document.getElementById("btnStartGoodNote");
+      const musicStagePrelude = document.getElementById("musicStagePrelude");
+
+      function startPreludeAndMusic(e) {
+        sound.startBackgroundMusic();
+        const targetEl = (e && e.currentTarget) ? e.currentTarget : btnStartGoodNote;
+        if (targetEl) {
+          const rect = targetEl.getBoundingClientRect();
+          spawnNoteSparkles(rect.left + rect.width / 2, rect.top + rect.height / 2);
+        }
+        fireConfetti(55);
+        goToScreen("screen1");
+      }
+
+      if (btnStartGoodNote) {
+        btnStartGoodNote.addEventListener("click", startPreludeAndMusic);
+      }
+      if (musicStagePrelude) {
+        musicStagePrelude.addEventListener("click", startPreludeAndMusic);
+      }
 
       // Screen 1 Setup
       if (cfg.screen1) {
@@ -2470,8 +2895,7 @@
       const btnNo = document.getElementById("btnNo");
 
       btnYes.addEventListener("click", () => {
-        sound.playChime();
-        goToScreen(1); // Go to Balloon Pop
+        goToScreen("screen2"); // Go to Balloon Pop
       });
 
       // Playful evasive "No" button
@@ -2479,7 +2903,6 @@
       const funnyPrompts = ["Are you sure? 🥺", "Think again! 😜", "You can't say no! 💖", "Try clicking Yes 💕"];
       btnNo.addEventListener("click", (e) => {
         noAttempts++;
-        sound.playTone(300, 0.15, "triangle");
         btnNo.innerText = funnyPrompts[noAttempts % funnyPrompts.length];
         const randomX = (Math.random() - 0.5) * 120;
         const randomY = (Math.random() - 0.5) * 60;
@@ -2506,8 +2929,7 @@
       function proceedFromBalloons() {
         if (!balloonCompleted) return;
         balloonCompleted = false;
-        sound.playTone(440, 0.1, "sine", 0.08);
-        goToScreen(2); // Go to Cake & Candle
+        goToScreen("screen3"); // Go to Cake & Candle
       }
 
       if (btnBalloonContinue) {
@@ -2561,7 +2983,6 @@
         bItem.addEventListener("click", (e) => {
           if (bItem.classList.contains("popping")) return;
           bItem.classList.add("popping");
-          sound.playBalloonPop();
 
           const rect = bItem.getBoundingClientRect();
           spawnPopSparkles(rect.left + rect.width / 2, rect.top + rect.height * 0.35);
@@ -2574,7 +2995,6 @@
             if (poppedCount === totalBalloons) {
               balloonCounter.innerText = cfg.screen2?.completedNote || "You are so special ✨";
               balloonCounter.classList.add("completed");
-              sound.playChime();
               fireConfetti(35);
 
               // Instead of auto-advancing, enable click-to-proceed and reveal continue button
@@ -2601,12 +3021,10 @@
       function blowCandle() {
         if (candleBlown) return;
         candleBlown = true;
-        sound.playWhoosh();
         cakeStand.classList.add("blown");
         candleSmoke.classList.add("drift");
 
         setTimeout(() => {
-          sound.playChime();
           wishCard.classList.add("show");
         }, 600);
       }
@@ -2654,7 +3072,7 @@
       });
 
       btnAfterWish.addEventListener("click", () => {
-        goToScreen(3); // Go to Rose Bouquet
+        goToScreen("screen4"); // Go to Rose Bouquet
       });
 
       // Screen 4: Flower Bouquet Setup
@@ -2709,10 +3127,6 @@
         if (noteIndex < noteCards.length) {
           noteCards[noteIndex].classList.add("pop-in");
 
-          // Melodic pentatonic chimes (C5 523Hz, E5 659Hz, G5 784Hz)
-          const harmonicChimes = [523.25, 659.25, 783.99];
-          sound.playTone(harmonicChimes[noteIndex] || 600, 0.28, "sine", 0.18);
-
           // Bounce bouquet with squash & stretch
           roseBouquet.classList.remove("bounce");
           void roseBouquet.offsetWidth;
@@ -2728,7 +3142,6 @@
           if (noteIndex === noteCards.length) {
             setTimeout(() => {
               btnBouquetContinue.classList.add("btn-bouquet-ready");
-              sound.playChime();
             }, 750);
           }
         }
@@ -2755,7 +3168,7 @@
       s4Observer.observe(document.getElementById("screen4"), { attributes: true, attributeFilter: ["class"] });
 
       btnBouquetContinue.addEventListener("click", () => {
-        goToScreen(4); // Go to Envelope Screen
+        goToScreen("screen5"); // Go to Envelope Screen
       });
 
       // Screen 5: Envelope & Letter Modal Setup
@@ -2817,17 +3230,12 @@
             envelopeOpeningTimer = null;
           }
           letterModal.classList.add("active");
-          sound.playChime();
           return;
         }
         envelopeBox.classList.add("opened");
-        sound.playTone(523.25, 0.25, "sine", 0.15); // C5
-        setTimeout(() => sound.playTone(659.25, 0.28, "sine", 0.15), 140); // E5
-        setTimeout(() => sound.playTone(783.99, 0.35, "sine", 0.18), 280); // G5
         
         // Keep a 2.5-second (2-3s) stay on the opened envelope & note card before opening the full letter
         envelopeOpeningTimer = setTimeout(() => {
-          sound.playChime();
           letterModal.classList.add("active");
           envelopeOpeningTimer = null;
         }, 2500);
@@ -2858,7 +3266,7 @@
       btnLetterNext.addEventListener("click", () => {
         letterModal.classList.remove("active");
         setTimeout(() => {
-          goToScreen(5); // Go to Gift Box Screen
+          goToScreen("screen6"); // Go to Gift Box Screen
         }, 400);
       });
 
@@ -2901,11 +3309,10 @@
         if (giftTaps >= targetTaps) return;
         giftTaps++;
 
-        // Wobble & sound
+        // Wobble
         giftBox.classList.remove("wobble");
         void giftBox.offsetWidth; // trigger reflow
         giftBox.classList.add("wobble");
-        sound.playTone(400 + giftTaps * 120, 0.15, "triangle", 0.25);
 
         tapBadge.innerText = giftTaps;
         tapBadge.classList.add("pop");
@@ -2966,7 +3373,7 @@
         finaleCard.style.display = "none";
         tapBadge.innerText = "1";
 
-        goToScreen(0); // Return to Screen 1
+        goToScreen("screen1"); // Return to Screen 1
       });
 
       // Background Music Button
