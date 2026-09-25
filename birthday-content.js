@@ -60,6 +60,7 @@ window.BIRTHDAY_CONFIG = {
     title: "Something I wanted to tell you… ♡",
     subtitle: "There are a few words waiting inside.",
     openButtonText: "OPEN MY LETTER 💌",
+    stampImage: "assets/WhatsApp Image 2026-09-25 at 1.02.33 PM.jpeg",
 
     letter: {
       salutation: "💌 Dear Pupu,",
@@ -93,6 +94,8 @@ window.BIRTHDAY_CONFIG = {
     subtitle: "There might be something waiting for you…",
 
     tapsRequired: 3,
+
+    finaleImage: "assets/dudu-bubu-love.gif",
 
     finaleTitle: "For my Pupu, with lots of love ♡",
 

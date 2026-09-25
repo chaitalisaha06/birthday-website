@@ -1709,25 +1709,70 @@
       position: absolute;
       top: 20px;
       right: 22px;
-      width: 52px;
-      height: 62px;
+      width: 108px;
+      height: 140px;
+      padding: 4px;
+      background: #ffffff;
       border: 2px dashed #d99cae;
-      border-radius: 4px;
-      background: #fff5f8;
+      border-radius: 8px;
+      box-shadow: 0 8px 22px rgba(160, 40, 75, 0.18), 0 2px 6px rgba(0, 0, 0, 0.08);
+      transform: rotate(3.5deg);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+      cursor: pointer;
+      z-index: 5;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      transform: rotate(5deg);
     }
 
-    .stamp-decor span {
+    .stamp-decor:hover {
+      transform: rotate(0deg) scale(1.05);
+      box-shadow: 0 12px 28px rgba(160, 40, 75, 0.26), 0 4px 10px rgba(0, 0, 0, 0.12);
+    }
+
+    .stamp-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 18%;
+      border-radius: 5px;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .stamp-decor:hover .stamp-img {
+      transform: scale(1.04);
+    }
+
+    .stamp-post-badge {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      padding: 1px 6px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+      border: 1px solid rgba(217, 156, 174, 0.45);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .stamp-post-badge .stamp-heart {
       font-size: 9px;
-      font-weight: 700;
       color: #d6336c;
-      letter-spacing: 0.1em;
-      margin-top: 2px;
+    }
+
+    .stamp-post-badge .stamp-text {
+      font-size: 9px;
+      font-weight: 800;
+      color: #9e2048;
+      letter-spacing: 0.12em;
+      line-height: 1;
     }
 
     .letter-body-content {
@@ -1737,10 +1782,15 @@
       line-height: 1.7;
     }
 
+    .letter-header-group {
+      padding-right: 120px;
+      min-height: 125px;
+    }
+
     .letter-body-content h3 {
       font-size: 26px;
       color: var(--deep-wine);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       font-weight: 700;
     }
 
@@ -1758,6 +1808,92 @@
       line-height: 1.35;
     }
 
+    /* Stamp Photo Lightbox Preview */
+    .stamp-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 150;
+      background: rgba(35, 15, 25, 0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .stamp-lightbox.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .stamp-lightbox-card {
+      position: relative;
+      background: #ffffff;
+      padding: 12px 12px 18px;
+      border-radius: 14px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.4);
+      max-width: min(90vw, 360px);
+      transform: scale(0.9) translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .stamp-lightbox.active .stamp-lightbox-card {
+      transform: scale(1) translateY(0);
+    }
+
+    .stamp-lightbox-close {
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1.5px solid rgba(214, 51, 108, 0.35);
+      color: #9e2048;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease, background 0.2s ease;
+      z-index: 10;
+    }
+
+    .stamp-lightbox-close:hover {
+      transform: scale(1.1);
+      background: #ffeef3;
+    }
+
+    .stamp-polaroid-frame {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stamp-polaroid-frame img {
+      width: 100%;
+      max-height: min(65vh, 440px);
+      object-fit: contain;
+      border-radius: 8px;
+      background: #f7eef2;
+    }
+
+    .stamp-polaroid-caption {
+      margin-top: 12px;
+      font-family: var(--font-hand);
+      font-size: 24px;
+      color: var(--deep-wine);
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+
     @media (max-width: 480px) {
       .letter-modal {
         padding: 14px 8px;
@@ -1770,9 +1906,14 @@
       .stamp-decor {
         top: 14px;
         right: 14px;
-        width: 44px;
-        height: 52px;
-        font-size: 18px;
+        width: 86px;
+        height: 112px;
+        padding: 3px;
+        border-radius: 6px;
+      }
+      .letter-header-group {
+        padding-right: 96px;
+        min-height: 98px;
       }
       .letter-body-content {
         font-size: 16px;
@@ -1780,8 +1921,8 @@
       }
       .letter-body-content h3 {
         font-size: 21px;
-        margin-bottom: 10px;
-        padding-right: 46px;
+        margin-bottom: 8px;
+        padding-right: 0;
       }
       .letter-body-content p {
         margin-bottom: 11px;
@@ -2371,14 +2512,19 @@
     <div class="letter-modal" id="letterModal">
       <div class="letter-sheet">
         <button class="letter-close-btn" id="btnCloseLetterModal" aria-label="Close Letter" title="Close">✕</button>
-        <div class="stamp-decor">
-          ♥
-          <span>POST</span>
+        <div class="stamp-decor" id="letterStampDecor" title="Tap to view photo ♡">
+          <img id="letterStampImg" class="stamp-img" src="assets/WhatsApp Image 2026-09-25 at 1.02.33 PM.jpeg" alt="Our Special Memory" />
+          <div class="stamp-post-badge">
+            <span class="stamp-heart">♥</span>
+            <span class="stamp-text">POST</span>
+          </div>
         </div>
 
         <div class="letter-body-content">
-          <h3 id="letterSalutation">Dear Pupu 💖🎂,</h3>
-          <p id="letterP1" style="font-weight: 600; color: #a82048;">Happy Birthday to someone truly special! 🎈</p>
+          <div class="letter-header-group">
+            <h3 id="letterSalutation">Dear Pupu 💖🎂,</h3>
+            <p id="letterP1" style="font-weight: 600; color: #a82048;">Happy Birthday to someone truly special! 🎈</p>
+          </div>
           <div id="letterParagraphs">
             <!-- Injected via script from config -->
           </div>
@@ -2388,6 +2534,17 @@
 
         <div style="text-align: center; margin-top: 30px;">
           <button id="btnLetterNext" class="btn-pill">One last surprise ➔</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stamp Photo Lightbox Preview Modal -->
+    <div class="stamp-lightbox" id="stampLightbox">
+      <div class="stamp-lightbox-card">
+        <button class="stamp-lightbox-close" id="btnCloseStampLightbox" aria-label="Close Preview" title="Close">✕</button>
+        <div class="stamp-polaroid-frame">
+          <img src="assets/WhatsApp Image 2026-09-25 at 1.02.33 PM.jpeg" id="stampLightboxImg" alt="Our Special Memory" />
+          <div class="stamp-polaroid-caption">A sweet memory with you ♡</div>
         </div>
       </div>
     </div>
@@ -2438,78 +2595,10 @@
 
       <!-- State B: Revealed Finale Card -->
       <div class="finale-card" id="finaleCard" style="display: none;">
-        <!-- Cute Brown & Cony Holding Heart ("LOVE") Sticker Illustration -->
+        <!-- Dudu & Bubu Love GIF -->
         <div class="finale-illustration">
-          <svg viewBox="0 0 320 260" width="100%" height="100%">
-            <!-- Soft Shadow -->
-            <ellipse cx="160" cy="245" rx="120" ry="14" fill="#fce7f3" />
-
-            <!-- Cony (White Bunny) on Left -->
-            <g id="conyBunny">
-              <!-- Left Long Ear -->
-              <ellipse cx="90" cy="55" rx="14" ry="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
-              <ellipse cx="90" cy="55" rx="7" ry="26" fill="#fbcfe8" />
-              <!-- Right Long Ear -->
-              <ellipse cx="120" cy="62" rx="14" ry="38" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
-              <ellipse cx="120" cy="62" rx="7" ry="24" fill="#fbcfe8" />
-              <!-- Bunny Head -->
-              <ellipse cx="110" cy="130" rx="44" ry="42" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
-              <!-- Happy Eyes -->
-              <path d="M 88 126 Q 96 118 102 126" stroke="#1e293b" stroke-width="3.5" fill="none"
-                stroke-linecap="round" />
-              <path d="M 118 126 Q 126 118 132 126" stroke="#1e293b" stroke-width="3.5" fill="none"
-                stroke-linecap="round" />
-              <!-- Cheeks -->
-              <circle cx="85" cy="138" r="8" fill="#f472b6" opacity="0.6" />
-              <circle cx="135" cy="138" r="8" fill="#f472b6" opacity="0.6" />
-              <!-- Nose & Mouth -->
-              <circle cx="110" cy="134" r="3.5" fill="#f43f5e" />
-              <path d="M 110 138 Q 104 146 100 144 M 110 138 Q 116 146 120 144" stroke="#1e293b" stroke-width="2"
-                fill="none" stroke-linecap="round" />
-              <!-- Body -->
-              <path d="M 80 165 C 75 190 70 230 110 235 C 135 235 140 200 135 165 Z" fill="#ffffff" stroke="#e2e8f0"
-                stroke-width="2" />
-            </g>
-
-            <!-- Brown (Brown Bear) on Right -->
-            <g id="brownBear">
-              <!-- Left Round Ear -->
-              <circle cx="195" cy="95" r="18" fill="#78350f" />
-              <circle cx="195" cy="95" r="10" fill="#a16207" />
-              <!-- Right Round Ear -->
-              <circle cx="245" cy="98" r="18" fill="#78350f" />
-              <circle cx="245" cy="98" r="10" fill="#a16207" />
-              <!-- Bear Head -->
-              <ellipse cx="218" cy="132" rx="44" ry="40" fill="#854d0e" />
-              <!-- Snout -->
-              <ellipse cx="218" cy="144" rx="18" ry="14" fill="#fef08a" />
-              <!-- Bear Eyes -->
-              <circle cx="198" cy="130" r="4" fill="#1e293b" />
-              <circle cx="238" cy="130" r="4" fill="#1e293b" />
-              <!-- Nose & Mouth -->
-              <ellipse cx="218" cy="140" rx="4.5" ry="3.5" fill="#1e293b" />
-              <path d="M 218 143 L 218 148 M 218 148 Q 212 153 210 151 M 218 148 Q 224 153 226 151" stroke="#1e293b"
-                stroke-width="2" fill="none" stroke-linecap="round" />
-              <!-- Bear Cheeks -->
-              <circle cx="190" cy="142" r="7" fill="#fb923c" opacity="0.6" />
-              <circle cx="246" cy="142" r="7" fill="#fb923c" opacity="0.6" />
-              <!-- Bear Body -->
-              <path d="M 185 165 C 180 200 185 235 215 235 C 255 235 250 190 245 165 Z" fill="#854d0e" />
-            </g>
-
-            <!-- Big Heart with "LOVE" Hugged by Both -->
-            <g id="giantHeart" transform="translate(160, 185)">
-              <path d="M 0 -35 C -50 -75 -85 -10 0 45 C 85 -10 50 -75 0 -35 Z" fill="#e11d48"
-                filter="drop-shadow(0 6px 14px rgba(225, 29, 72, 0.4))" />
-              <text x="0" y="-8" font-family="'Plus Jakarta Sans', sans-serif" font-size="19" font-weight="900"
-                fill="#ffffff" text-anchor="middle" letter-spacing="2">LOVE</text>
-              <circle cx="-16" cy="-24" r="3" fill="#ffffff" opacity="0.8" />
-            </g>
-
-            <!-- Little Floating Sparkles -->
-            <path d="M 60 80 L 63 88 L 71 91 L 63 94 L 60 102 L 57 94 L 49 91 L 57 88 Z" fill="#fbbf24" />
-            <path d="M 260 70 L 262 76 L 268 78 L 262 80 L 260 86 L 258 80 L 252 78 L 258 76 Z" fill="#f43f5e" />
-          </svg>
+          <img id="finaleImg" src="assets/dudu-bubu-love.gif" alt="Dudu and Bubu Love"
+            style="width: 100%; max-width: 220px; height: auto; display: block; margin: 0 auto; border-radius: 18px; filter: drop-shadow(0 10px 24px rgba(214, 51, 108, 0.16));" />
         </div>
 
         <h3 class="title-banner" id="finaleHeading" style="font-size: clamp(26px, 6vw, 36px); margin-bottom: 6px;">Lots
@@ -3220,6 +3309,38 @@
         document.getElementById("letterSignature").innerText = cfg.screen5.letter.signature || "Your Special Someone 🌸";
       }
 
+      // Inject Stamp Image from Config
+      if (cfg.screen5?.stampImage) {
+        const sImg = document.getElementById("letterStampImg");
+        const lbImg = document.getElementById("stampLightboxImg");
+        if (sImg) sImg.src = cfg.screen5.stampImage;
+        if (lbImg) lbImg.src = cfg.screen5.stampImage;
+      }
+
+      // Stamp Lightbox Interaction
+      const letterStampDecor = document.getElementById("letterStampDecor");
+      const stampLightbox = document.getElementById("stampLightbox");
+      const btnCloseStampLightbox = document.getElementById("btnCloseStampLightbox");
+
+      if (letterStampDecor && stampLightbox) {
+        letterStampDecor.addEventListener("click", (e) => {
+          e.stopPropagation();
+          stampLightbox.classList.add("active");
+        });
+      }
+      if (btnCloseStampLightbox && stampLightbox) {
+        btnCloseStampLightbox.addEventListener("click", () => {
+          stampLightbox.classList.remove("active");
+        });
+      }
+      if (stampLightbox) {
+        stampLightbox.addEventListener("click", (e) => {
+          if (e.target === stampLightbox) {
+            stampLightbox.classList.remove("active");
+          }
+        });
+      }
+
       let envelopeOpeningTimer = null;
 
       function openEnvelope() {
@@ -3299,6 +3420,10 @@
             fs.innerText = cfg.screen6.finaleSub;
             fs.style.whiteSpace = "pre-line";
           }
+        }
+        if (cfg.screen6.finaleImage) {
+          const fi = document.getElementById("finaleImg");
+          if (fi) fi.src = cfg.screen6.finaleImage;
         }
         if (cfg.screen6.replayButtonText && btnReplay) {
           btnReplay.innerText = cfg.screen6.replayButtonText;
